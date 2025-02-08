@@ -23,6 +23,7 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	pop_after=max(0,pop_before-kill);
 	if (pop_after<=0) and (pop_before>0) then heres_after=0;
 
+    // Code bits copied from scr_purge_world
     if (star_system.p_population[planet_number] > 0) {
         heres_before = max(star_system.p_heresy[planet_number] + star_system.p_heresy_secret[planet_number], star_system.p_influence[planet_number][eFACTION.Tau]);
         sci1 = 0;
