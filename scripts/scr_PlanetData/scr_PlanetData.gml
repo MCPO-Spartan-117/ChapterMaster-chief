@@ -578,22 +578,20 @@ function PlanetData(planet, system) constructor{
         var target_planet_heresy=corruption;
         if (target_planet_heresy <= 10) {
             temp6 = "None";
-        }
-        if (target_planet_heresy > 10 && target_planet_heresy <= 30) {
+        } else if (target_planet_heresy > 10 && target_planet_heresy <= 30) {
             temp6 = "Little";
-        }
-        if (target_planet_heresy > 30 && target_planet_heresy <= 50) {
+        } else if (target_planet_heresy > 30 && target_planet_heresy <= 50) {
             temp6 = "Major";
-        }
-        if (target_planet_heresy > 50 && target_planet_heresy <= 70) {
+        } else if (target_planet_heresy > 50 && target_planet_heresy <= 70) {
             temp6 = "Heavy";
-        }
-        if (target_planet_heresy > 70 && target_planet_heresy <= 96) {
+        } else if (target_planet_heresy > 70 && target_planet_heresy <= 96) {
             temp6 = "Extreme";
-        }
-        if (target_planet_heresy >= 96) {
+        } else if (target_planet_heresy >= 96) {
             temp6 = "Maximum";
+        } else {
+            temp6 = "DEBUG: Heresy somehow unknown value!"
         }
+
         draw_text(xx+480,yy+300,$"Corruption: {temp6}");
         
         
