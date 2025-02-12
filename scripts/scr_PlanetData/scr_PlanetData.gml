@@ -589,7 +589,7 @@ function PlanetData(planet, system) constructor{
             temp6 = "Heavy";
         } else if (target_planet_heresy <= 96) {
             temp6 = "Extreme";
-        } else if (target_planet_heresy >= 97) {
+        } else if (target_planet_heresy <= 100) {
             temp6 = "Maximum";
         } else if (target_planet_heresy > 100) {
             temp6 = "DEBUG: Heresy above 100!";
