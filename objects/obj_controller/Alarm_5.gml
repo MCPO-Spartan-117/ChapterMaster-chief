@@ -429,10 +429,10 @@ if (training_techmarine>0){
                 unit.religion="cult_mechanicus";
                 if (obj_controller.faction_status[eFACTION.Mechanicus] != "War") {
                     unit.add_trait("mars_trained");
-                    scr_alert("green","recruitment",unit.name()+" returns from Mars, a "+unit.role()+".",0,0);
+                    scr_alert("green","recruitment",$"{unit.name()} returns from Mars, a {unit.role()}.",0,0);
                 } else {
-                    unit.add_trait("chapter_trained");
-                    scr_alert("green","recruitment",unit.name_role()+" has finished training.",0,0);
+                    unit.add_trait("chapter_trained_tech");
+                    scr_alert("green","recruitment",$"{unit.name_role()} has finished training.",0,0);
                 }
 
                  warn="";
@@ -451,7 +451,7 @@ if (training_techmarine>0){
                     scr_alert("red","recruitment","Not enough equipment: "+string(warn),0,0);
                 }
 
-                if (obj_controller.faction_status[eFACTION.Mechanicus] != "War") || (unit.ship_location == -1) {
+                if (obj_ini.loc[unit.company][unit.marine_number] == "Terra") {
                     unit.allocate_unit_to_fresh_spawn("default");
                 }
  
@@ -490,7 +490,7 @@ if (training_techmarine>0){
                 // Remove from ship
                 if (obj_controller.faction_status[eFACTION.Mechanicus] != "War") {
                     if (unit.ship_location>-1){
-                        var man_size=scr_unit_size(obj_ini.armour[0][g1],obj_ini.role[0][g1],true);
+                        var man_size=unit.get_unit_size();
                         obj_ini.ship_carrying[unit.ship_location]-=man_size;
                     }
                     obj_ini.loc[0][g1]="Terra";
