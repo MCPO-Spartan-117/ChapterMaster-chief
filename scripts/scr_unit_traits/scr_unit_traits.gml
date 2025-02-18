@@ -165,7 +165,7 @@ global.trait_list = {
 	},
 	"zealous_faith":{
 		strength:[1,1,"max"],
-		texhnology:-2,
+		technology:-2,
 		wisdom:3,
 		intelligence:-2,
 		piety:[5,2,"max"],

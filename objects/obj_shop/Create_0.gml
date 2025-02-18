@@ -1581,7 +1581,7 @@ if (shop == "production"){
             item_stocked[i] = 0;
             forge_cost[i] = 3000;
             tooltip_overide[i] = "This research uncovers the lost techniques of Advanced Ceramite Bonding, allowing us to create superior armors. It fortifies our war plate, offering unparalleled protection against enemy fire. This dramatically enhances the survivability of our units as well as unlocking new armor capabilities.\n\nUnlocks: MK3 Iron Armour.\nRequired for: MK8 Errant, Artificer Armour, Terminator Armour, Tartaros.";
-        } else if (research.armour[1].armour[0] >= 2){
+        } else if (research.armour[1].armour[0] == 2){
             i++;
             item[i] = ["research","Ceremite Void Hardening", ["armour", "armour"]];
             item_stocked[i] = 0;
@@ -1595,7 +1595,7 @@ if (shop == "production"){
             forge_cost[i] = 3000;
             tooltip_overide[i] = "This research unlocks the knowledge to fabricate the Mk VIII 'Errant' pattern Power Armour, a refinement of the ubiquitous Aquila armour, often favored by veteran Astartes and officers due to its unparalleled protection. It features improved plating around the torso and neck, enhancing its resilience against both ranged and melee attacks. This technology marks the pinnacle of power armour technology and a significant step in the path to becoming a battle-hardened Astartes.\n\nUnlocks: MK8 Errant.\nRequired for: Artificer Armour.";               
         }        
-        if (research.armour[1].stealth[0] >0 && research.armour[1].armour[0] >1){
+        if (research.armour[1].stealth[0] == 1 && research.armour[1].armour[0] == 1){
             i++;
             item[i] =  ["research","Enhanced Nerve Interfacing", ["armour", "armour"]];
             item_stocked[i] = 0;
