@@ -318,7 +318,13 @@ function techmarine_training(){
 	if (training_techmarine>0){
 	    recruit_count=scr_role_count(novice_type,"");
 
-	    if (tech_points>=360){
+    if (obj_controller.faction_status[eFACTION.Mechanicus] != "War") {
+        var _threshold = 360
+    } else {
+        var _threshold = 252
+    }
+
+	    if (tech_points>=_threshold){
 	        if (recruit_count>0){
 	            random_marine=scr_random_marine(novice_type,0);
 	            if (random_marine != "none"){
