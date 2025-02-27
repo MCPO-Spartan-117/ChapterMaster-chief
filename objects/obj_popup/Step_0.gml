@@ -403,10 +403,10 @@ try {
 					repeat (700) {
 						ide += 1;
 						if ((attend_corrupted[ide] == 0) && (attend_id[ide] > 0)) {
-							if (string_count("Chaos", obj_ini.artifact_tags[obj_controller.fest_display]) > 0) {
+							if (string_count("chaos", obj_ini.artifact_tags[obj_controller.fest_display]) > 0) {
 								obj_ini.TTRPG[attend_co[ide], attend_id[ide]].corruption += choose(1, 2, 3, 4);
 							}
-							if (string_count("Daem", obj_ini.artifact_tags[obj_controller.fest_display]) > 0) {
+							if (string_count("daemonic", obj_ini.artifact_tags[obj_controller.fest_display]) > 0) {
 								obj_ini.TTRPG[attend_co[ide], attend_id[ide]].corruption += choose(6, 7, 8, 9);
 							}
 							attend_corrupted[ide] = 1;

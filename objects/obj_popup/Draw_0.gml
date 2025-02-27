@@ -932,7 +932,7 @@ try {
 					}
 
 					unit = obj_ini.TTRPG[target_comp][obj_controller.ide[i]];
-					if (arti.has_tag("Daemonic") || arti.has_tag("Chaos")) {
+					if (arti.has_tag("daemonic") || arti.has_tag("chaos")) {
 						unit.corruption += irandom(10 + 2);
 						if (unit.role() == "Chapter Master") {
 							dwarn = true;
