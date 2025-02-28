@@ -168,7 +168,7 @@ function apothecary_training(){
 	            }                  
 	        } else {
                 training_apothecary = 0;
-	            scr_alert("red","recruitment","No marines available for apothecary traning",0,0);
+	            scr_alert("red","recruitment",$"No marines available for {obj_ini.role[100][eROLE.Apothecary]} traning",0,0);
 	        }
 	    }
 	}	
@@ -239,7 +239,7 @@ function chaplain_training(){
 	                }                      
                 } else {
                     training_chaplain = 0;
-                    scr_alert("red","recruitment","No remaining chaplain applicant marines for training",0,0);
+                    scr_alert("red","recruitment",$"No remaining {obj_ini.role[100][eROLE.Chaplain]} applicant marines for training",0,0);
                 }
 	        }
 	    }
@@ -423,7 +423,7 @@ function techmarine_training(){
 	            }    
 	        } else{
 	            training_techmarine = 0;
-                scr_alert("red","recruitment",$"No marines with sufficient technology aptitude for {obj_ini.role[100][16]} training",0,0);
+                scr_alert("red","recruitment",$"No marines with sufficient technology aptitude for {obj_ini.role[100][eROLE.Techmarine]} training",0,0);
 	        }
 	    }
 	}
