@@ -149,7 +149,7 @@ function apothecary_training(){
 	        }
 	    }else if (apothecary_recruit_points>=4) and (recruit_count==0){
             var random_marine = spec_data_set(eROLE_TAG.Apothecary);
-	        if (random_marine != "none"){
+            if (random_marine != "none") {
                 var marine_position=random_marine[1];
                 var marine_company=random_marine[0];
 	            // This gets the last open slot for company 0
@@ -167,6 +167,7 @@ function apothecary_training(){
 	                }
 	            }                  
 	        } else {
+                training_apothecary = 0;
 	            scr_alert("red","recruitment","No marines available for apothecary traning",0,0);
 	        }
 	    }
@@ -219,7 +220,7 @@ function chaplain_training(){
 	            }
 	        }else if (chaplain_points>=4) and (recruit_count==0){
                 var random_marine = spec_data_set(eROLE_TAG.Chaplain);
-	            if (random_marine != "none"){
+                if (random_marine != "none") {
                     var marine_position = random_marine[1];
                     var marine_company = random_marine[0];
 	            	var open_slot = find_company_open_slot(0);
@@ -236,7 +237,10 @@ function chaplain_training(){
 	                        scr_company_order(0);
 	                    }
 	                }                      
-	            }
+                } else {
+                    training_chaplain = 0;
+                    scr_alert("red","recruitment","No remaining chaplain applicant marines for training",0,0);
+                }
 	        }
 	    }
 	}	
@@ -279,8 +283,8 @@ function librarian_training(){
 	        }
 	    } else if (psyker_points>=4) and (recruit_count==0){
             var random_marine = spec_data_set(eROLE_TAG.Librarian);
-	        if (random_marine == "none"){
-	            training_psyker=0;
+            if (random_marine == "none") {
+                training_psyker = 0;
 	            scr_alert("red","recruitment","No remaining warp sensitive marines for training",0,0);
 	        }else if (random_marine != "none"){
 	            // This gets the last open slot for company 0
@@ -383,7 +387,7 @@ function techmarine_training(){
 	        }
 	    }else if (tech_points>=4) and (recruit_count==0){    
             var random_marine = spec_data_set(eROLE_TAG.Techmarine);
-	        if (random_marine != "none"){
+            if (random_marine != "none") {
                 var marine_position = random_marine[1];
                 var marine_company = random_marine[0];
 	            // This gets the last open slot for company 0
@@ -419,7 +423,7 @@ function techmarine_training(){
 	            }    
 	        } else{
 	            training_techmarine = 0;
-	            scr_alert("red",string("recruitment","No marines with sufficient technology aptitude for {0} training",obj_ini.role[100][16]),0,0);
+                scr_alert("red","recruitment",$"No marines with sufficient technology aptitude for {obj_ini.role[100][16]} training",0,0);
 	        }
 	    }
 	}
