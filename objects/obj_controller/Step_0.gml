@@ -461,7 +461,9 @@ if (unload>0){
     for(var i=0; i<array_length(display_unit); i++){
         man_sel[i]=0;
     }
-    obj_ini.ship_carrying[b]-=man_size;
+    if (b > -1 && b<array_length(obj_ini.ship_carrying)){
+            obj_ini.ship_carrying[b]-=man_size;
+    }
     reset_ship_manage_arrays();
     cooldown=10;
     sel_loading=-1;
@@ -470,7 +472,7 @@ if (unload>0){
     with(obj_star_select){instance_destroy();}
 }
 // Resets selections
-if (managing>0) and (man_size==0) and ((selecting_location!="") or (selecting_types!="") or (selecting_planet!=0) or (selecting_ship!=-1)){
+if (man_size==0) and ((selecting_location!="") or (selecting_types!="") or (selecting_planet!=0) or (selecting_ship!=-1)){
     selecting_location="";
     selecting_types="";
     selecting_planet=0;
