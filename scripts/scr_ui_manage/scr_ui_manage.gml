@@ -181,29 +181,20 @@ function scr_ui_manage() {
 			var x6=x5+string_width("Company View")+8;
 			var y6=y5+string_height("Company View")+2;
 			button_coords = draw_unit_buttons([x5, y5, x6, y6], stat_tool_tip_text,[1,1],#50a076);
-			if (managing>0 && managing<11){
-				array_push(tooltip_drawing, ["Click here or press S to toggle Squad View.", [x5,y5,x6,y6]]);
-				if ((point_in_rectangle(mouse_x, mouse_y,x5,y5,x6,y6) && mouse_check_button_pressed(mb_left)) || (keyboard_check_pressed(ord("S")) && !text_bar)){
-					obj_controller.view_squad = !obj_controller.view_squad;
-					if (stat_tool_tip_text=="Squad View"){
-						obj_controller.company_data = new CompanyStruct(obj_controller.managing);
-						obj_controller.unit_profile = true;
-					} else {
-						obj_controller.unit_profile = false;
-					}
-				}	
-			} else{
-				draw_set_alpha(0.5);
-				draw_set_color(c_black);
-				draw_rectangle(x5, y5, x6, y6, 0);
-				draw_set_alpha(1);
-			}
-			if (!view_squad){
-				if (!unit_profile){
-					stat_tool_tip_text = "Show Profile";
+			array_push(tooltip_drawing, ["Click here or press S to toggle Squad View.", [x5,y5,x6,y6]]);
+			if ( point_and_click([x5,y5,x6,y6]) || (keyboard_check_pressed(ord("S")) && !text_bar)){
+				obj_controller.view_squad = !obj_controller.view_squad;
+				if (stat_tool_tip_text=="Squad View"){
+					new_company_struct();
+					obj_controller.unit_profile = true;
 				} else {
-					stat_tool_tip_text = "Hide Profile"; 
+					obj_controller.unit_profile = false;
 				}
+			}	
+
+			if (!view_squad){
+				stat_tool_tip_text = !unit_profile  ?  "Show Profile" : "Hide Profile";
+
 				x5=x6+4;
 				x6=x5+string_width("Show Profile")+8;
 				array_push(tooltip_drawing, ["Click here or press P to show unit profile.", [x5,y5,x6,y6]]);
