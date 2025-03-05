@@ -897,17 +897,6 @@ function scr_ui_manage() {
 					} else if (sel_loading!=-1){
 						button.label = "Unload";
 						if (button.draw()){
-                            for (var t = 0; t < array_length(display_unit); t++) {
-                                if (man_sel[t] == 1) {
-                                    if (!is_array(display_unit[t])) {
-                                        display_unit[t].last_ship.uid = obj_ini.ship_uid[display_unit[t].ship_location];
-                                        display_unit[t].last_ship.name = obj_ini.ship[display_unit[t].ship_location];
-                                    } else {
-                                        obj_ini.last_ship[display_unit[t][0]][display_unit[t][1]].uid = obj_ini.ship_uid[obj_ini.veh_lid[display_unit[t][0]][display_unit[t][1]]];
-                                        obj_ini.last_ship[display_unit[t][0]][display_unit[t][1]].name = obj_ini.ship[obj_ini.veh_lid[display_unit[t][0]][display_unit[t][1]]];
-                                    }
-                                }
-                            }
 							unload_selection();   // Unload - ask for planet confirmation
 						}
 					}
