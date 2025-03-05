@@ -65,7 +65,6 @@ function CompanyStruct(comp) constructor{
 		color:c_red,
 		label : "<--"
 	});
-	previous_squad_button.update_loc();
 
 	next_squad_button = new UnitButtonObject({
 		x1 : xx+center_width[1]-44,
@@ -132,7 +131,6 @@ function CompanyStruct(comp) constructor{
 		member = grab_current_squad().members[0];
 		obj_controller.temp[120] = fetch_unit(member);			
 	}
-	previous_squad_button.update_loc()
 	squad_search();
 
 	cur_squad = 0;
