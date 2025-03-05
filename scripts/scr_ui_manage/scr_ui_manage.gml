@@ -81,7 +81,7 @@ function load_marines_into_ship(system, ship, units, reload=false) {
         cooldown = 8;
         selecting_ship = -1;
     }
-    if (managing == -1) {
+    if (managing == -1 && obj_controller.selection_data.purpose != "Ship Management") {
         update_garrison_manage();
     }
 }
