@@ -58,7 +58,7 @@ selection_window.inside_method = function(){
             var fleet_marines_temp = [];
             var fleet_marines = [];
             for (var i = 0; i < array_length(fleet_array); i++) {
-                fleet_marines_temp = collect_role_group("all", ["", 0, i]);
+                fleet_marines_temp = collect_role_group("all", ["", 0, fleet_array[i]]);
                 array_copy(fleet_marines, array_length(fleet_marines), fleet_marines_temp, 0, array_length(fleet_marines_temp));
             }
 
