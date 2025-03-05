@@ -126,7 +126,40 @@ if (global.cheat_debug && obj_controller.selecting_planet && !loading)
         }
     }
 
+if (obj_controller.managing == 0) {
+    var unitsgo = false;
+    for (var i = 1; i <= target.planets; i++) {
+        if (target.p_player[i] > 0) {
+            unitsgo = true;
+            break;
+        }
+    }
 
+    if (unitsgo && point_and_click(draw_unit_buttons([125, 200], "Manage Units",[1,1],c_blue))) {
+        location_viewer = new UnitQuickFindPanel();
+        location_viewer.update_garrison_log();
+        var system_names = struct_get_names(location_viewer.garrison_log);
+        var sysnum = -1;
+        for (var i = 0; i < array_length(system_names); i++) {
+            if (system_names[i] == target.name) {
+                sysnum = i;
+                break;
+            }
+        }
+
+        if (sysnum != -1) {
+            group_selection(location_viewer.garrison_log[$system_names[sysnum]].units,{
+                purpose:$"{target.name} Management",
+                purpose_code : "manage",
+                number:0,
+                system:target.id,
+                feature:"none",
+                planet : 0,
+                selections : []
+            });
+        }
+    }
+}
 
 if (loading!=0){
     draw_set_font(fnt_40k_14);
