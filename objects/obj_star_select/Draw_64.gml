@@ -128,15 +128,14 @@ if (global.cheat_debug && obj_controller.selecting_planet && !loading)
 
 if (obj_controller.managing == 0) {
     var unitsgo = false;
-    for (var i = 1; i <= target.planets; i++) {
-        if (target.p_player[i] > 0) {
-            unitsgo = true;
-            break;
-        }
+    var i = 1;
+    while (i <= target.planets && !unitsgo) {
+        unitsgo = target.p_player[i] > 0;
+        i++;
     }
 
     if (unitsgo && point_and_click(draw_unit_buttons([125, 200], "Manage Units",[1,1],c_blue))) {
-        location_viewer = new UnitQuickFindPanel();
+        var location_viewer = new UnitQuickFindPanel();
         location_viewer.update_garrison_log();
         var system_names = struct_get_names(location_viewer.garrison_log);
         var sysnum = -1;
