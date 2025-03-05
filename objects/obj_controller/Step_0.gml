@@ -472,7 +472,7 @@ if (unload>0){
     with(obj_star_select){instance_destroy();}
 }
 // Resets selections
-if (man_size==0) and ((selecting_location!="") or (selecting_types!="") or (selecting_planet!=0) or (selecting_ship!=-1)){
+if (managing>0) and (man_size==0) and ((selecting_location!="") or (selecting_types!="") or (selecting_planet!=0) or (selecting_ship!=-1)){
     selecting_location="";
     selecting_types="";
     selecting_planet=0;
