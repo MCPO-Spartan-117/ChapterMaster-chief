@@ -909,7 +909,9 @@ function scr_ui_manage() {
 
                 button.label = "Reload";
                 //button.keystroke = (keyboard_check(vk_shift) && (keyboard_check_pressed(ord("F"))));
-                button.tooltip = $"{temp[120].last_ship.name}"//Press Shift F";
+                if (instance_exists(cn)) and (is_struct(temp[120])) {
+                    button.tooltip = $"{temp[120].last_ship.name}"//Press Shift F";
+                }
                 reload_possible = man_size>0 && sel_loading==-1;
                 if (reload_possible) {
                     button.alpha = 1;
