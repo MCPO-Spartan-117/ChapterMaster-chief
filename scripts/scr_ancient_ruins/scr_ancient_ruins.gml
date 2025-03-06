@@ -252,7 +252,7 @@ function scr_ruins_combat_end() {
         var dice=d100_roll();
 
         if (dice < (_battle_threat*10)){
-            if (ruins_race == 5){
+            if (ruins_race == eFACTION.Ecclesiarchy){
                 obj_controller.disposition[5]+=2;
 
                 if (scr_has_adv("Reverent Guardians")) {
@@ -264,25 +264,25 @@ function scr_ruins_combat_end() {
 
 
             if (ruins_race < 5) {
-                var di = choose(2,4);
+                var di = choose(eFACTION.Imperium, eFACTION.Inquisition);
                 switch (di) {
-                case 2:
-                    obj_controller.disposition[2]+=2;
+                case eFACTION.Imperium:
+                    obj_controller.disposition[eFACTION.Imperium]+=2;
                     break;
-                case 4:
-                    obj_controller.disposition[4]+=1;
+                case eFACTION.Inquisition:
+                    obj_controller.disposition[eFACTION.Inquisition]+=1;
                     break;
                 }
-            } else if (ruins_race == 6) {
+            } else if (ruins_race == eFACTION.Eldar) {
                 switch (ruins_battle) {
                 case 6:
-                    obj_controller.disposition[6]-=5;
+                    obj_controller.disposition[eFACTION.Eldar]-=5;
                     break;
                 case 11:
-                    obj_controller.disposition[6]+=2;
+                    obj_controller.disposition[eFACTION.Eldar]+=2;
                     break;
                 case 12:
-                    obj_controller.disposition[6]+=4;
+                    obj_controller.disposition[eFACTION.Eldar]+=4;
                     break;
                 }
             }
@@ -293,16 +293,16 @@ function scr_ruins_combat_end() {
         var dice=d100_roll();
 
         if (dice < (_battle_threat*10)){
-            if (ruins_race == 5) {
+            if (ruins_race == eFACTION.Ecclesiarchy) {
                 obj_controller.disposition[5]-=2;
             } else if (ruins_race < 5){
-                var di=choose(2,4);
+                var di=choose(eFACTION.Imperium, eFACTION.Inquisition);
                 switch (di) {
-                case 2:
-                    obj_controller.disposition[2]-=2;
+                case eFACTION.Imperium:
+                    obj_controller.disposition[eFACTION.Imperium]-=2;
                     break;
-                case 4:
-                    obj_controller.disposition[4]-=1;
+                case eFACTION.Inquisition:
+                    obj_controller.disposition[eFACTION.Inquisition]-=1;
                     break;
                 }
             }

@@ -794,15 +794,15 @@ try {
                 }
 
                 switch (_ruins.ruins_race) {
-                case 1:
-                case 2:
-                case 10:
+                case eFACTION.Player:
+                case eFACTION.Imperium:
+                case eFACTION.Chaos:
                     ruins_battle = choose(10, 10, 10, 10, 11, 11, 12);
                     break;
-                case 5:
+                case eFACTION.Ecclesiarchy:
                     ruins_battle = 10;
                     break;
-                case 6:
+                case eFACTION.Eldar:
                     ruins_battle = choose(6, 6, 10, 10, 10, 12);
                     break;
                 default:
@@ -819,19 +819,19 @@ try {
                 option3 = "";
                 text = "Your marines descended into the ancient ruins, mapping them out as they go.  They quickly determine the ruins were once ";
                 switch (_ruins.ruins_race) {
-                case 1:
+                case eFACTION.Player:
                     text += "a Space Marine fortification from earlier times.";
                     break;
-                case 2:
+                case eFACTION.Imperium:
                     text += "golden-age Imperial ruins, lost to time.";
                     break;
-                case 5:
+                case eFACTION.Ecclesiarchy:
                     text += "a magnificent temple of the Imperial Cult.";
                     break;
-                case 6:
+                case eFACTION.Eldar:
                     text += "Eldar colonization structures from an unknown time.";
                     break;
-                case 10:
+                case eFACTION.Chaos:
                     text += "golden-age Imperial ruins, since decorated with spikes and bones.";
                     break;
                 }
