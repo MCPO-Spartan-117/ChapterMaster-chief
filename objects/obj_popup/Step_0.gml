@@ -778,10 +778,7 @@ try {
             // ruins_battle=1;
 
             if (ruins_battle == 1) {
-                dice = irandom(100);
-                if (shit_luck) {
-                    dice += 10;
-                }
+                dice = d100_roll();
 
                 if (dice >= 0 && dice <= 60) {
                     battle_threat = 1;
