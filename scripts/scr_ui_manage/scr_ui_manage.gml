@@ -1,72 +1,71 @@
 function load_marines_into_ship(system, ship, units, reload=false) {
-    if (reload == true) || ((sh_cargo[ship] + man_size) <= sh_cargo_max[ship]) {
-        var onceh = 0;
-        stop = 0;
-        var _load_into_ship = function(system, ship, units, loop, reload) {
-            var load_from_star = star_by_name(system);
-            if (is_struct(units[loop])) {
-                units[loop].load_marine(sh_ide[ship], load_from_star);
-                ma_loc[loop] = sh_loc[ship];
-                ma_lid[loop] = sh_ide[ship];
-                ma_wid[loop] = 0;
-            } else if (is_array(units[loop]) && ma_loc[loop] == system && sh_loc[ship] == system) {
-                var vehicle = units[loop];
-                var vehic_size = scr_unit_size("", ma_role[loop], true);
+    var onceh = 0;
+    stop = 0;
+    var _load_into_ship = function(system, ship, units, size, loop, reload) {
+        var load_from_star = star_by_name(system);
+        if (is_struct(units[loop])) {
+            units[loop].load_marine(sh_ide[ship], load_from_star);
+            ma_loc[loop] = sh_loc[ship];
+            ma_lid[loop] = sh_ide[ship];
+            ma_wid[loop] = 0;
+        } else if (is_array(units[loop]) && ma_loc[loop] == system && sh_loc[ship] == system) {
+            var vehicle = units[loop];
 
-                if ((sh_cargo[ship] + vehic_size) <= sh_cargo_max[ship] && man_sel[loop] != 0) {
-                    var start_ship = obj_ini.veh_lid[vehicle[0]][vehicle[1]];
-                    var start_planet = obj_ini.veh_wid[vehicle[0]][vehicle[1]];
-                    ma_loc[loop] = sh_loc[ship];
-                    ma_lid[loop] = sh_ide[ship];
-                    ma_wid[loop] = 0;
-                    obj_ini.veh_loc[vehicle[0]][vehicle[1]] = sh_name[ship];
-                    obj_ini.veh_lid[vehicle[0]][vehicle[1]] = sh_ide[ship];
-                    obj_ini.veh_wid[vehicle[0]][vehicle[1]] = 0;
-                    obj_ini.veh_uid[vehicle[0]][vehicle[1]] = sh_uid[ship];
-                    obj_ini.ship_carrying[sh_ide[ship]] += vehic_size;
-                    if (start_planet) {
-                        load_from_star.p_player[start_planet] -= vehic_size;
-                    } else if (start_ship) {
-                        obj_ini.ship_carrying[start_ship] -= vehic_size;
-                    }
-                }
-                set_vehicle_last_ship(vehicle, true);
-            }
-        }
+            var start_ship = obj_ini.veh_lid[vehicle[0]][vehicle[1]];
+            var start_planet = obj_ini.veh_wid[vehicle[0]][vehicle[1]];
+            ma_loc[loop] = sh_loc[ship];
+            ma_lid[loop] = sh_ide[ship];
+            ma_wid[loop] = 0;
+            obj_ini.veh_loc[vehicle[0]][vehicle[1]] = sh_name[ship];
+            obj_ini.veh_lid[vehicle[0]][vehicle[1]] = sh_ide[ship];
+            obj_ini.veh_wid[vehicle[0]][vehicle[1]] = 0;
+            obj_ini.veh_uid[vehicle[0]][vehicle[1]] = sh_uid[ship];
+            obj_ini.ship_carrying[sh_ide[ship]] += size;
 
-        if (reload == false) {
-            for (var q = 0; q < array_length(units); q++) {
-                if (man_sel[q] == 1) {
-                    _load_into_ship(system, ship, units, q)
-                    man_sel[q] = 0;
-                }
+            if (start_planet) {
+                load_from_star.p_player[start_planet] -= size;
+            } else if (start_ship) {
+                obj_ini.ship_carrying[start_ship] -= size;
             }
-        } else {
-            for (var q = 0; q < array_length(units); q++) {
-                if (man_sel[q] == 1) {
-                    var _unit_ship_id
-                    if (!is_array(units[q])) {
-                        var _unit_ship_id = array_get_index(sh_uid, units[q].last_ship.uid)
-                    } else {
-                        var _unit_ship_id = array_get_index(sh_uid, obj_ini.last_ship[units[q][0]][units[q][1]].uid)
-                    }
 
-                    if (_unit_ship_id != undefined && ((sh_cargo[_unit_ship_id] + man_size) <= sh_cargo_max[_unit_ship_id])) {
-                        _load_into_ship(system, _unit_ship_id, units, q, reload)
-                        man_sel[q] = 0;
-                    }
-                }
-            }
+            set_vehicle_last_ship(vehicle, true);
         }
-        system = "";
-        man_size = 0;
-        man_current = 0;
-        if (reload == false) {
-            menu = 1;
-        }
-        cooldown = 8;
-        selecting_ship = -1;
     }
+
+    for (var q = 0; q < array_length(units); q++) {
+        if (man_sel[q] == 1) {
+            var _unit_ship_id
+            if (!reload) {
+                _unit_ship_id = ship;
+            } else {
+                if (!is_array(units[q])) {
+                    _unit_ship_id = array_get_index(sh_uid, units[q].last_ship.uid);
+                } else {
+                    _unit_ship_id = array_get_index(sh_uid, obj_ini.last_ship[units[q][0]][units[q][1]].uid);
+                }
+            }
+
+            if (!is_array(units[q])) {
+                var _unit_size = man_size;
+            } else {
+                var _vehic_size = scr_unit_size("", ma_role[q], true);
+                var _unit_size = _vehic_size;
+            }
+
+            if (_unit_ship_id != undefined && ((sh_cargo[_unit_ship_id] + _unit_size) <= sh_cargo_max[_unit_ship_id])) {
+                _load_into_ship(system, _unit_ship_id, units, _unit_size, q, reload)
+                man_sel[q] = 0;
+            }
+        }
+    }
+    system = "";
+    man_size = 0;
+    man_current = 0;
+    if (reload == false) {
+        menu = 1;
+    }
+    cooldown = 8;
+    selecting_ship = -1;
     if (managing == -1 && obj_controller.selection_data.purpose != "Ship Management") {
         update_garrison_manage();
     }

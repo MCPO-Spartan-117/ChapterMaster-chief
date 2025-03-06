@@ -127,7 +127,7 @@ function CompanyStruct(comp) constructor{
 		if (up){
 			cur_squad = cur_squad+1>=array_length(company_squads) ? 0 : cur_squad+1;
 		} else {
-			cur_squad = (cur_squad-1<0) ? 0 : cur_squad-1;
+			cur_squad = (cur_squad-1<0) ? array_length(company_squads)-1 : cur_squad-1;
 		}
 		member = grab_current_squad().members[0];
 		obj_controller.temp[120] = fetch_unit(member);			
