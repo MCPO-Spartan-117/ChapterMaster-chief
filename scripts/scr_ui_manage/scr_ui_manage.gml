@@ -1,6 +1,4 @@
 function load_marines_into_ship(system, ship, units, reload=false) {
-    var onceh = 0;
-    stop = 0;
     var _load_into_ship = function(system, ship, units, size, loop, reload) {
         var load_from_star = star_by_name(system);
         if (is_struct(units[loop])) {

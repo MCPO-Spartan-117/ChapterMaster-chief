@@ -1,3 +1,4 @@
+// Records or nullifies the association between a vehicle and its last ship
 function set_vehicle_last_ship(vehic_array, empty = false) {
 	if (!empty) {
 		var vehic_ini = obj_ini.veh_lid[vehic_array[0]][vehic_array[1]];
