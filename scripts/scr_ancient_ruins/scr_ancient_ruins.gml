@@ -287,6 +287,8 @@ function scr_ruins_combat_end() {
                 }
             }
         }
+
+        scr_ruins_reward(_star,location_id,self);
     } else if (obj_ground_mission.defeat == 1) {
         var dice=d100_roll();
 
@@ -358,9 +360,4 @@ function scr_ruins_combat_end() {
             }
         }
     }
-
-    if (obj_ground_mission.defeat=0) {
-        scr_ruins_reward(_star,location_id,self);
-    }
-
 }
