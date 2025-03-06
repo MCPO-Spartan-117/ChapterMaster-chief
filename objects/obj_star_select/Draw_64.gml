@@ -135,28 +135,18 @@ if (obj_controller.managing == 0) {
     }
 
     if (unitsgo && point_and_click(draw_unit_buttons([125, 200], "Manage Units",[1,1],c_blue))) {
-        var location_viewer = new UnitQuickFindPanel();
-        location_viewer.update_garrison_log();
-        var system_names = struct_get_names(location_viewer.garrison_log);
-        var sysnum = -1;
-        for (var i = 0; i < array_length(system_names); i++) {
-            if (system_names[i] == target.name) {
-                sysnum = i;
-                break;
-            }
-        }
+        var system_names = struct_get_names(obj_controller.location_viewer.garrison_log);
+        var sysnum = array_get_index(system_names, target.name);
 
-        if (sysnum != -1) {
-            group_selection(location_viewer.garrison_log[$system_names[sysnum]].units,{
-                purpose:$"{target.name} Management",
-                purpose_code : "manage",
-                number:0,
-                system:target.id,
-                feature:"none",
-                planet : 0,
-                selections : []
-            });
-        }
+        group_selection(obj_controller.location_viewer.garrison_log[$system_names[sysnum]].units,{
+            purpose:$"{target.name} Management",
+            purpose_code : "manage",
+            number:0,
+            system:target.id,
+            feature:"none",
+            planet : 0,
+            selections : []
+        });
     }
 }
 
