@@ -30,7 +30,7 @@ function load_marines_into_ship(system, ship, units, reload=false) {
                         obj_ini.ship_carrying[start_ship] -= vehic_size;
                     }
                 }
-                set_vehicle_last_ship();
+                set_vehicle_last_ship(vehicle, true);
             }
         }
 
@@ -44,20 +44,16 @@ function load_marines_into_ship(system, ship, units, reload=false) {
         } else {
             for (var q = 0; q < array_length(units); q++) {
                 if (man_sel[q] == 1) {
-                    for (var t = 0; t < ship_max; t++) {
-                        if (!is_array(units[q])) {
-                            if (units[q].last_ship.uid == sh_uid[t] && ((sh_cargo[t] + man_size) <= sh_cargo_max[t])) {
-                                _load_into_ship(system, t, units, q, reload)
-                                man_sel[q] = 0;
-                                break;
-                            }
-                        } else {
-                            if (obj_ini.last_ship[units[q][0]][units[q][1]].uid == sh_uid[t] && ((sh_cargo[t] + man_size) <= sh_cargo_max[t])) {
-                                _load_into_ship(system, t, units, q, reload)
-                                man_sel[q] = 0;
-                                break;
-                            }
-                        }
+                    var _unit_ship_id
+                    if (!is_array(units[q])) {
+                        var _unit_ship_id = array_get_index(sh_uid, units[q].last_ship.uid)
+                    } else {
+                        var _unit_ship_id = array_get_index(sh_uid, obj_ini.last_ship[units[q][0]][units[q][1]].uid)
+                    }
+
+                    if (_unit_ship_id != undefined && ((sh_cargo[_unit_ship_id] + man_size) <= sh_cargo_max[_unit_ship_id])) {
+                        _load_into_ship(system, _unit_ship_id, units, q, reload)
+                        man_sel[q] = 0;
                     }
                 }
             }

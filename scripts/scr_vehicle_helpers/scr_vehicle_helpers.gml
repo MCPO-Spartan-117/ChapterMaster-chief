@@ -1,8 +1,9 @@
-function set_vehicle_last_ship(vehic_array, empty = false){
-	if (empty =false){
+function set_vehicle_last_ship(vehic_array, empty = false) {
+	if (empty == false) {
+		var vehic_ini = obj_ini.veh_lid[vehic_array[0]][vehic_array[1]];
 		var _last_ship_data = {
-			uid : obj_ini.veh_lid[vehic_array[0]][vehic_array[1]],
-			name : obj_ini.veh_lid[vehic_array[0]][vehic_array[1]],
+			uid : obj_ini.ship_uid[vehic_ini],
+			name : obj_ini.ship[vehic_ini],
 		}
 	} else {
 		var _last_ship_data = {

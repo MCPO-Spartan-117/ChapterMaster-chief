@@ -36,7 +36,6 @@ function CompanyStruct(comp) constructor{
 			}
 		} else if (company == -1){
 			var _disp_units = obj_controller.display_unit;
-			var viable_squads
 			for (var i=0; i<array_length(_disp_units); i++){
 				var unit = _disp_units[i];
 				if (!is_array(unit)){
@@ -261,7 +260,7 @@ function CompanyStruct(comp) constructor{
 			var send_on_mission=false, mission_type;
 			if (current_squad.assignment == "none"){
 
-				draw_text_transformed(xx+bound_width[0]+5, yy+bound_height[0]+125, $"Squad has no current assigments",1,1,0);
+				draw_text_transformed(xx+bound_width[0]+5, yy+bound_height[0]+125, $"Squad has no current assignments",1,1,0);
 
 				var _squad_sys = squad_loc.system;
 				if (squad_loc.same_system) and (_squad_sys!="Warp" && _squad_sys!="Lost"){
