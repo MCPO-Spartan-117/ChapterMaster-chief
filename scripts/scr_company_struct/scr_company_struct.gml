@@ -39,16 +39,18 @@ function CompanyStruct(comp) constructor{
 			var viable_squads
 			for (var i=0; i<array_length(_disp_units); i++){
 				var unit = _disp_units[i];
-				if (unit.squad != "none"){
-					if (array_contains(company_squads, unit.squad)) then continue;
-					if (unit.squad < array_length(_squads)){
-						var cur_squad = _squads[unit.squad];
-						cur_squad.update_fulfilment();
-						if (array_length(cur_squad.members)>0){
-							array_push(company_squads,unit.squad);
+				if (!is_array(unit)){
+					if (unit.squad != "none"){
+						if (array_contains(company_squads, unit.squad)) then continue;
+						if (unit.squad < array_length(_squads)){
+							var cur_squad = _squads[unit.squad];
+							cur_squad.update_fulfilment();
+							if (array_length(cur_squad.members)>0){
+								array_push(company_squads,unit.squad);
+							}
+						} else {
+							unit.squad = "none";
 						}
-					} else {
-						unit.squad = "none";
 					}
 				}
 			}

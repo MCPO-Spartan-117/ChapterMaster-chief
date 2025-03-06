@@ -30,6 +30,7 @@ function load_marines_into_ship(system, ship, units, reload=false) {
                         obj_ini.ship_carrying[start_ship] -= vehic_size;
                     }
                 }
+                set_vehicle_last_ship();
             }
         }
 
@@ -37,13 +38,6 @@ function load_marines_into_ship(system, ship, units, reload=false) {
             for (var q = 0; q < array_length(units); q++) {
                 if (man_sel[q] == 1) {
                     _load_into_ship(system, ship, units, q)
-                    if (!is_array(units[q])) {
-                        units[q].last_ship.uid = "";
-                        units[q].last_ship.name = "";
-                    } else {
-                        obj_ini.last_ship[units[q][0]][units[q][1]].uid = ""
-                        obj_ini.last_ship[units[q][0]][units[q][1]].name = ""
-                    }
                     man_sel[q] = 0;
                 }
             }
@@ -54,16 +48,12 @@ function load_marines_into_ship(system, ship, units, reload=false) {
                         if (!is_array(units[q])) {
                             if (units[q].last_ship.uid == sh_uid[t] && ((sh_cargo[t] + man_size) <= sh_cargo_max[t])) {
                                 _load_into_ship(system, t, units, q, reload)
-                                units[q].last_ship.uid = "";
-                                units[q].last_ship.name = "";
                                 man_sel[q] = 0;
                                 break;
                             }
                         } else {
                             if (obj_ini.last_ship[units[q][0]][units[q][1]].uid == sh_uid[t] && ((sh_cargo[t] + man_size) <= sh_cargo_max[t])) {
                                 _load_into_ship(system, t, units, q, reload)
-                                obj_ini.last_ship[units[q][0]][units[q][1]].uid = ""
-                                obj_ini.last_ship[units[q][0]][units[q][1]].name = ""
                                 man_sel[q] = 0;
                                 break;
                             }
