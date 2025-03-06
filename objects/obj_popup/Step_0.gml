@@ -866,13 +866,13 @@ try {
         }
         if (press == 3) {
             // Return to ship, exit
-            scr_return_ship(obj_ground_mission.loc, obj_ground_mission, obj_ground_mission.num);
+            scr_return_ship(obj_ini.ship[obj_ground_mission.ship_id], obj_ground_mission, obj_ground_mission.num);
             var man_size, ship_id, comp, plan, i;
             ship_id = 0;
             man_size = 0;
             comp = 0;
             plan = 0;
-            ship_id = array_get_index(obj_ini.ship, obj_ground_mission.loc);
+            ship_id = obj_ground_mission.ship_id;
             obj_controller.menu = 0;
             obj_controller.managing = 0;
             obj_controller.cooldown = 10;

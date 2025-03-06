@@ -246,7 +246,7 @@ function scr_ruins_combat_end() {
     ruins_battle = choose(6,7,9,10,11,12);
 
     _star = star_by_name(obj_ground_mission.battle_loc);
-    var location_id = obj_ground_mission.loc;
+    var planet = obj_ground_mission.num;
     var _battle_threat = obj_ground_mission.battle_threat;
     if (obj_ground_mission.defeat == 0){
         var dice=d100_roll();
@@ -288,7 +288,7 @@ function scr_ruins_combat_end() {
             }
         }
 
-        scr_ruins_reward(_star,location_id,self);
+        scr_ruins_reward(_star,planet,self);
     } else if (obj_ground_mission.defeat == 1) {
         var dice=d100_roll();
 
@@ -310,16 +310,16 @@ function scr_ruins_combat_end() {
         var pop=instance_create(0,0,obj_popup);
         switch (ruins_battle) {
         case 10:
-            _star.p_traitors[location_id]=_battle_threat+1;
-            _star.p_heresy[location_id]+=10;
+            _star.p_traitors[planet]=_battle_threat+1;
+            _star.p_heresy[planet]+=10;
             break;
         case 11:
-            _star.p_traitors[location_id]=_battle_threat+1;
-            _star.p_heresy[location_id]+=25;
+            _star.p_traitors[planet]=_battle_threat+1;
+            _star.p_heresy[planet]+=25;
             break;
         case 12:
-            _star.p_demons[location_id]=_battle_threat+1;
-            _star.p_heresy[location_id]+=40;
+            _star.p_demons[planet]=_battle_threat+1;
+            _star.p_heresy[planet]+=40;
             break;
         }
 
@@ -342,18 +342,18 @@ function scr_ruins_combat_end() {
         var equip_lost = obj_ground_mission.post_equipment_lost;
         var equip_count_lost = obj_ground_mission.post_equipments_lost;
         if (equip_lost[1]!=""){
-            for (var i = 0; i < array_length(equip_lost); i++) {
-                var _new_equip = floor(equip_count_lost[i]/2);
-                if (_new_equip == 0) {
-                    _new_equip++;
+            for (var i = 0; i < array_length(equip_lost); i++) { // glorified repeat loop, fix later
+                if (equip_lost[i]!="") and (equip_count_lost[i]>0) {
+                    var _new_equip = floor(equip_count_lost[i]/2);
+                    if (_new_equip == 0) {
+                        _new_equip++;
+                    }
+                    array_push(recoverables, [equip_lost[i],_new_equip])
                 }
-                array_push(recoverables, [equip_lost[i],_new_equip])
             }
-            gene_recoverables = obj_ground_mission.recoverable_gene_seed;
-            if (gene_recoverables > 0) {
-                if (gene_recoverables < 1) {
-                    gene_recoverables = floor(gene_recoverables/2);
-                }
+            recoverable_gene_seed = obj_ground_mission.recoverable_gene_seed;
+            if (recoverable_gene_seed > 1) {
+                recoverable_gene_seed = floor(recoverable_gene_seed/2);
             }
             if (array_length(recoverables) > 0) {
                 unrecovered_items=true;
