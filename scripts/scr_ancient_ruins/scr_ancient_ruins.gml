@@ -249,11 +249,7 @@ function scr_ruins_combat_end() {
     var location_id = obj_ground_mission.loc;
     var _battle_threat = obj_ground_mission.battle_threat;
     if (obj_ground_mission.defeat == 0){
-        //TODO centralise d100 rolls
-        var dice=irandom(100);
-        if (scr_has_disadv("Shitty Luck")) {
-            dice+=10;
-        }
+        var dice=d100_roll();
 
         if (dice < (_battle_threat*10)){
             if (ruins_race == 5){
@@ -292,10 +288,7 @@ function scr_ruins_combat_end() {
             }
         }
     } else if (obj_ground_mission.defeat == 1) {
-        var dice=irandom(100);
-        if (scr_has_disadv("Shitty Luck")) {
-            dice+=10;
-        }
+        var dice=d100_roll();
 
         if (dice < (_battle_threat*10)){
             if (ruins_race == 5) {

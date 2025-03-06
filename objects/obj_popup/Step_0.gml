@@ -488,11 +488,8 @@ try {
 
 		if (press > 0) {
 			var randa, randa2;
-			randa = floor(random(100)) + 1;
-			randa2 = floor(random(100)) + 1;
-			if (scr_has_disadv("Shitty Luck")) {
-				randa -= 20;
-			}
+			randa = d100_roll(true, 20);
+			randa2 = d100_roll(false);
 		}
 
 		if (press == 1) {
@@ -518,7 +515,7 @@ try {
 			new_target.dispo[planet] = 70 + floor(random_range(5, 15)) + 1;
 			scr_event_log("", "Planetary Governor of " + string(new_target.name) + " " + scr_roman(planet) + " assassinated.  A more suitable Governor is installed.");
 			if (randa2 <= (10 * estimate)) {
-                for (var i = 0; i < obj_controller.event; i++) {
+                for (var i = 0; i < array_length(obj_controller.event); i++) {
                     if (obj_controller.event[i] == "") {
                         var ev = i;
                         break;
@@ -541,7 +538,7 @@ try {
 			new_target.dispo[planet] = 101;
 			scr_event_log("", "Planetary Governor of " + string(new_target.name) + " " + scr_roman(planet) + " assassinated.  One of your Chapter Serfs take their position.");
 			if (randa2 <= (25 * estimate)) {
-                for (var i = 0; i < obj_controller.event; i++) {
+                for (var i = 0; i < array_length(obj_controller.event); i++) {
                     if (obj_controller.event[i] == "") {
                         var ev = i;
                         break;
@@ -775,10 +772,8 @@ try {
 
             _ruins.determine_race();
 
-            dice = irandom(100);
-            var shit_luck = scr_has_disadv("Shitty Luck");
-            var pass_mark = shit_luck ? 66 : 50;
-            ruins_battle = dice <= pass_mark;
+            dice = d100_roll(true, 20);
+            ruins_battle = dice <= 50;
 
             // ruins_battle=1;
 
@@ -863,14 +858,7 @@ try {
             obj_controller.menu = 1;
             // obj_controller.managing=manag;
             with (obj_controller) {
-                var i = -1;
-                man_size = 0;
-                selecting_location = "";
-                selecting_types = "";
-                selecting_ship = -1;
-                sel_uid = 0;
-                reset_manage_arrays();
-                alll = 0;
+                scr_ui_refresh()
                 update_general_manage_view();
             }
             with (obj_ground_mission) {
@@ -1768,7 +1756,7 @@ try {
 			scr_event_log("", "Artifact Recovered from radical Inquisitor.");
 			scr_event_log("", "Inquisition Mission Completed: The radical Inquisitor has been purged.");
 
-            for (var i = 0; i < obj_controller.event; i++) {
+            for (var i = 0; i < array_length(obj_controller.event); i++) {
                 if (obj_controller.event[i] == "") {
                     var ev = i;
                     break;
@@ -1799,7 +1787,7 @@ try {
 
 			scr_event_log("", "Inquisition Mission Completed?: The radical Inquisitor has been allowed to flee in order to weaken the forces of Chaos, as they promised.");
 
-            for (var i = 0; i < obj_controller.event; i++) {
+            for (var i = 0; i < array_length(obj_controller.event); i++) {
                 if (obj_controller.event[i] == "") {
                     var ev = i;
                     break;
