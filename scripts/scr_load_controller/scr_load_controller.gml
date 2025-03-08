@@ -183,8 +183,8 @@ function scr_load_controller(save_id){
         obj_controller.bat_rhin_for=return_json_from_ini("Formation","rhin",array_create(17,6));
         obj_controller.bat_pred_for=return_json_from_ini("Formation","pred",array_create(17,7));
         obj_controller.bat_landraid_for=return_json_from_ini("Formation","landraid",array_create(17,7));
-		obj_controller.bat_landspee_for=return_json_from_ini("Formation","landspee",array_create(17,4));
-		obj_controller.bat_whirl_for=return_json_from_ini("Formation","whirl",array_create(17,1));
+        obj_controller.bat_landspee_for=return_json_from_ini("Formation","landspee",array_create(17,4));
+        obj_controller.bat_whirl_for=return_json_from_ini("Formation","whirl",array_create(17,1));
         obj_controller.bat_scou_for=return_json_from_ini("Formation","scou",array_create(17,1));
 
 
