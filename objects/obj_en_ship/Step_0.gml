@@ -500,8 +500,8 @@ if (hp>0) and (instance_exists(obj_p_ship)){
                 if (string_count("Ion",wep)=1){bull.sprite_index=spr_pulse;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Rail",wep)=1){bull.sprite_index=spr_railgun;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Gravitic",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
-                if (string_count("Plasma", wep) == 1){bull.sprite_index = spr_ground_plasma; bull.image_xscale = 2; bullimage_yscale = 2; bull.speed = 15 * global.frame_pacing;}
-                if (string_count("Pyro-Acid",wep)=1){bull.sprite_index=spr_glob;bull.image_xscale=2;bullimage_yscale=2;}
+                if (string_count("Plasma", wep) == 1){bull.sprite_index = spr_ground_plasma; bull.image_xscale = 2; bull.image_yscale = 2; bull.speed = 15 * global.frame_pacing;}
+                if (string_count("Pyro-Acid", wep) == 1){bull.sprite_index = spr_glob; bull.image_xscale = 2; bull.image_yscale = 2;}
                 
                 if (string_count("Weapons",wep)=1) and (owner = eFACTION.Eldar){bull.sprite_index=spr_ground_las;bull.image_xscale=2;bull.image_yscale=2;}
                 if (string_count("Pulse",wep)=1) and (owner = eFACTION.Eldar){bull.sprite_index=spr_pulse;bull.image_xscale=1.5;bull.image_yscale=1.5;}

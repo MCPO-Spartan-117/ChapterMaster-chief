@@ -58,9 +58,9 @@ if (slate1 <= 0) && (slate3 < 20) { slate3 += frame_pacing; }
 if (slate2 >= 7) && (slate4 < 30) { slate4 += frame_pacing; }
 
 if (slate5 >= 1) && (slate5 <= 60) { slate5 += frame_pacing; }
-if (slate5 == 61) { slate5 = 0; }
+if (slate5 >= 61) { slate5 = 0; }
 if (slate6 >= 1) && (slate6 <= 60) { slate6 += frame_pacing; }
-if (slate6 == 61) { slate6 = 0; }
+if (slate6 >= 61) { slate6 = 0; }
 
 if (slate4>=30){
     var _frame_pace_temp = 660 * global.invert_frame_pacing;
@@ -68,9 +68,7 @@ if (slate4>=30){
     if (irandom(_frame_pace_temp) == 0 && slate6 <= 0) { slate6 = 1; }
 }
 
-if (change_slide > 0) { change_slide += frame_pacing; }
-if (change_slide > 0) { change_slide += frame_pacing; }
-if (change_slide >= 100) { change_slide = -1; }
+if (change_slide > 0) { change_slide += 2 * global.frame_pacing; }
 if (change_slide >= 100) { change_slide = -1; }
 // Sets up a new chapter with default options
 if (change_slide >= 35 && change_slide <= 36) || (chapter_name=="Doom Benefactors") || (chapter_string=="Doom Benefactors") {
