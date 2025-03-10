@@ -29,7 +29,9 @@ if (settings=1){
     draw_text(xx + 493, yy + 523, string_hash_to_newline("Sync to display"));
     // draw_text(xx+493,yy+423+59,string_hash_to_newline("Large Text?:"));
     // draw_text(xx+493,yy+483+59,string_hash_to_newline("Heresy?:"));
-    
+
+    draw_text(xx + 510, yy + 620, string_hash_to_newline("Does not use Delta Time, FPS below target will slow down"));
+
     draw_set_color(0);// 264 long
     draw_rectangle(xx+710,yy+224,xx+974,yy+254,0);
     draw_rectangle(xx+710,yy+282,xx+974,yy+312,0);
