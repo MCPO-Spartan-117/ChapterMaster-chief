@@ -1,4 +1,3 @@
-frame_pacing = 1 * global.frame_pacing;
 var xx,yy;yy=784;
 if (instance_exists(obj_saveload)) or (instance_exists(obj_credits)) then yy=830;
 if (oth<40) then oth+=1;
@@ -12,9 +11,9 @@ if (room_get_name(room)="Creation"){
     } else {
         hover[1]=0; //not hovering on exit
     }
-    if (cooldown > 0) { cooldown -= frame_pacing; }
-    if (fading == 0) && (fade > 0) { fade -= frame_pacing; }
-    if (fading == 1) && ((fade < 40) || (crap > 0) || (button == 1)) { fade += frame_pacing; }
+    if (cooldown > 0) { cooldown -= global.frame_timings.t1; }
+    if (fading == 0) && (fade > 0) { fade -= global.frame_timings.t1; }
+    if (fading == 1) && ((fade < 40) || (crap > 0) || (button == 1)) { fade += global.frame_timings.t1; }
     
     if (fade >= 60) { room_goto(Main_Menu); }
     exit;
@@ -33,9 +32,9 @@ if ((instance_exists(obj_saveload)) || (instance_exists(obj_credits))) && (fadin
 
 
 
-if (cooldown > 0) { cooldown -= frame_pacing; }
-if (fading == 0) && (fade > 0) { fade -= frame_pacing; }
-if (fading == 1) && ((fade < 40) || (button == 4) || (crap > 0)) { fade += frame_pacing; }
+if (cooldown > 0) { cooldown -= global.frame_timings.t1; }
+if (fading == 0) && (fade > 0) { fade -= global.frame_timings.t1; }
+if (fading == 1) && ((fade < 40) || (button == 4) || (crap > 0)) { fade += global.frame_timings.t1; }
 
 if (crap > 0) && (fade >= 60){
     with(obj_main_menu){

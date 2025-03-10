@@ -1,7 +1,7 @@
 
 if (life >= 0.75 && life <= 1.25) && (projectile_infos == 0) { instance_destroy(); }
 
-life += 1 * global.frame_pacing;
+life += global.frame_timings.t1;
 
 if (sprite_index=spr_flame2){
     if (instance_exists(owner)){
@@ -22,7 +22,7 @@ if (life >= 1.75 && life <= 2.25) && (sprite_index != spr_flame2) {
         rep.image_index=image_index;
         rep.image_speed=image_speed;
         rep.direction=direction;
-        rep.speed = speed * global.frame_pacing;
+        rep.speed = speed;
         instance_destroy();
     }
 }

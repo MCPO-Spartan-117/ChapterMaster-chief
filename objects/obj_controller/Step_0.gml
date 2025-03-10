@@ -388,7 +388,7 @@ and (faction_justmet==1) and (questing==0) and (trading_demand==0) and (complex_
 income=income_base+income_home+income_forge+income_agri+income_training+income_fleet+income_trade+income_tribute;
 
 if (menu == 20) && ((diplomacy > 0) || ((diplomacy < -5) && (diplomacy > -6))){
-    if (cooldown_text > 0) { cooldown_text -= 1 * global.frame_pacing };
+    if (cooldown_text > 0) { cooldown_text -= global.frame_timings.t1 };
     if (cooldown_text <= 0 && string_length(diplo_txt) < string_length(diplo_text)){
         diplo_char += 2;
         diplo_txt = string_copy(diplo_text, 0, diplo_char);

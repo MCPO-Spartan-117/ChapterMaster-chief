@@ -16,10 +16,10 @@ if (fast=0){
 
 
 fast += 1;
-if (fast < alerts) { alarm[2] = int64(10 * global.invert_frame_pacing); }
+if (fast < alerts) { alarm[2] = int64(global.frame_timings.i10); }
 
-if (fast>=alerts){
-    alarm[2] = int64(9999 * global.invert_frame_pacing);
+if (fast >= alerts) {
+    alarm[2] = int64(global.frame_timings.i9999);
     alarm[3] = int64(max(230, (alerts * 60)) * global.invert_frame_pacing);
     alarm[3] = int64(min(alarm[3], 360) * global.invert_frame_pacing);
 }

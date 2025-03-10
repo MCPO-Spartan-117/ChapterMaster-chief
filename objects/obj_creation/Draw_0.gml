@@ -686,7 +686,7 @@ try {
 			if (point_and_click([604, 756, 675, 824]) && (cooldown <= 0) && (!instance_exists(obj_creation_popup))) {
 				// Previous slide
 				cooldown = 8000;
-				change_slide = frame_pacing;
+				change_slide = global.frame_timings.t1;
 				goto_slide = slide - 1;
 				popup = "";
 				if (goto_slide == 1) {

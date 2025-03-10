@@ -13,7 +13,7 @@ if (instance_exists(target)){
     
     dist=point_distance(x,y,target.x,target.y);
     
-    if (action="goto") {speed = 4 * global.frame_pacing;
+    if (action="goto") {speed = global.frame_timings.t4;
         direction=turn_towards_point(direction,x,y,target.x,target.y,8);
         direction=turn_towards_point(direction,x,y,target.x,target.y,8);
     }
@@ -37,7 +37,7 @@ if (instance_exists(target)){
     // Might change based on chapter settings
 }
 
-if (action="return"){speed = 4 * global.frame_pacing;
+if (action="return"){speed = global.frame_timings.t4;
     direction=turn_towards_point(direction,x,y,origin.x,origin.y,8);
     direction=turn_towards_point(direction,x,y,origin.x,origin.y,8);
 }
@@ -64,7 +64,7 @@ if (boarding=true) and (!instance_exists(target)){
 }
 var unit;
 if (boarding == true) && (board_cooldown >= 0) && (instance_exists(target)) && (instance_exists(origin)){
-    board_cooldown -= 1 * global.frame_pacing;
+    board_cooldown -= global.frame_timings.t1;
 
     if (board_cooldown <= 0){board_cooldown = 60;
         var o,challenge,difficulty,roll1,roll2,attack,arp,wep,ac,dr,co,i,hits,hurt,damaged_ship;

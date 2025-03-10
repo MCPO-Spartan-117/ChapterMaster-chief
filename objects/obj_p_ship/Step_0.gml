@@ -4,10 +4,9 @@ if (obj_fleet.start!=5) then exit;
 
 
 var dist;
-var _cooldown_temp = 1 * global.frame_pacing;
 
 if (shields>0) and (shields<maxshields) then shields+=0.02;
-if (board_cooldown >= 0) { board_cooldown -= _cooldown_temp; }
+if (board_cooldown >= 0) { board_cooldown -= global.frame_timings.t1; }
 
 // Need to every couple of seconds check this
 // with obj_en_ship if not big then disable, check nearest, and activate once more
@@ -71,7 +70,7 @@ if (hp<=0) and (x>-5000){
 if (hp>0) and (instance_exists(target)){
     for (var i=0;i<array_length(cooldown);i++){
         if (cooldown[i]>0){
-            cooldown[i] -= _cooldown_temp;
+            cooldown[i] -= global.frame_timings.t1;
         }
     }
 
@@ -123,11 +122,8 @@ if (hp>0) and (instance_exists(target)){
     }
     
     // STC Bonuses
-    var speed_up, speed_down; speed_up = 0.005; speed_down = 0.025;
-    if (obj_controller.stc_bonus[6] == 3) {speed_up += 0.003; speed_down += 0.012;}
-
-    speed_up *= global.frame_pacing;
-    speed_down *= global.frame_pacing;
+    var speed_up, speed_down; speed_up = global.frame_timings.t0005; speed_down = global.frame_timings.t0025;
+    if (obj_controller.stc_bonus[6] == 3) {speed_up += global.frame_timings.t0003; speed_down += global.frame_timings.t0012;}
 
     if (paction="turn") or (paction="attack_turn"){
         direction=turn_towards_point(direction,x,y,target_x,target_y,ts/2);
@@ -193,7 +189,7 @@ if (hp>0) and (instance_exists(target)){
         if (dist>64) and (dist<300){
             bull=instance_create(x,y,obj_p_round);
             bull.direction=point_direction(x,y,targe.x,targe.y);
-            bull.speed = 20 * global.frame_pacing; bull.dam=3;
+            bull.speed = global.frame_timings.t20; bull.dam=3;
             bull.image_xscale=0.5;
             bull.image_yscale=0.5;
             turret_cool=floor(60/turrets);
@@ -261,7 +257,7 @@ if (hp>0) and (instance_exists(target)){
                     
                     if (string_count("orpedo",wep)=0) and (string_count("hawk",wep)=0) and (ok=3){
                         bull=instance_create(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),obj_p_round);
-                        bull.speed = 20 * global.frame_pacing; bull.dam = dam;
+                        bull.speed = global.frame_timings.t20; bull.dam = dam;
                         if (targe=target) then bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);
                         if (facing!="front"){bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);}
                         if (string_count("ova",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
@@ -279,21 +275,21 @@ if (hp>0) and (instance_exists(target)){
                         
                         if (sprite_index=spr_ship_bb){
                             bull=instance_create(x,y+lengthdir_y(-30,direction+90),obj_p_round);
-                            bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
+                            bull.speed = global.frame_timings.t10; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                         }
                         
                         bull=instance_create(x,y+lengthdir_y(-10,direction+90),obj_p_round);
-                        bull.speed = 10 * global.frame_pacing;
+                        bull.speed = global.frame_timings.t10;
                         bull.direction=direction;bull.sprite_index=spr_torpedo;
                         bull.dam=dam;
                         bull=instance_create(x,y+lengthdir_y(10,direction+90),obj_p_round);
-                        bull.speed = 10 * global.frame_pacing;
+                        bull.speed = global.frame_timings.t10;
                         bull.direction=direction;bull.sprite_index=spr_torpedo;
                         bull.dam=dam;
                         
                         if (sprite_index=spr_ship_bb){
                             bull=instance_create(x,y+lengthdir_y(30,direction+90),obj_p_round);
-                            bull.speed = 10 * global.frame_pacing;
+                            bull.speed = global.frame_timings.t10;
                             bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
                         }
                     }

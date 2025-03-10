@@ -364,7 +364,6 @@ function UnitQuickFindPanel() constructor{
 
 				var x_draw=0;
 				var lower_draw = main_panel.height+110;
-				var _frame_pacing = 1 * global.frame_pacing
 				if (hide_sequence >= 30) { hide_sequence=0; }
 				if ((hide_sequence>0 && hide_sequence<15) || (hide_sequence>15 && hide_sequence<30)){
 					if (hide_sequence>15){
@@ -372,7 +371,7 @@ function UnitQuickFindPanel() constructor{
 					} else {
 						x_draw=-((main_panel.width/15)*hide_sequence);
 					}
-					hide_sequence += _frame_pacing;
+					hide_sequence += global.frame_timings.t1;
 				}
 				if (hide_sequence>15 || hide_sequence<15){
 					main_panel.draw(x_draw, 110, 0.46, 0.75);
@@ -391,12 +390,12 @@ function UnitQuickFindPanel() constructor{
 						tab_buttons.hider.draw(0,lower_draw, "Show")
 					} else {
 						if (tab_buttons.hider.draw(x_draw+280,lower_draw, "Hide")){
-						    hide_sequence += _frame_pacing;
+						    hide_sequence += global.frame_timings.t1;
 						}					
 					}					
 				} else if (hide_sequence==15){
 					if (tab_buttons.hider.draw(0,lower_draw, "Show")){
-					    hide_sequence += _frame_pacing;
+					    hide_sequence += global.frame_timings.t1;
 					}
 				}
 				/*if (tab_buttons.troops.draw(345,79, "Troops")){

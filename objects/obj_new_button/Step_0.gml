@@ -75,12 +75,11 @@ if (highlighted=true) and (instance_exists(obj_ingame_menu)){if (obj_ingame_menu
 if (highlighted=true) and (highlight<0.5) then highlight+=0.02;
 if (highlighted=false) and (highlight>0) then highlight-=0.04;
 
-var _frame_pacing = 1 * global.frame_pacing;
-var freq = int64(150 * global.invert_frame_pacing); if (line > 0) { line += _frame_pacing; }
+var freq = int64(global.frame_timings.i150); if (line > 0) { line += global.frame_timings.t1; }
 if (button_id=4) and (line>105) then line=0;
 if (button_id<=2) and (line>(141*scaling)) then line=0;
 if (button_id=3) and (line>113) then line=0;
-if (line == 0 && irandom(freq) == 0) { line = _frame_pacing; }
+if (line == 0 && irandom(freq) == 0) { line = global.frame_timings.t1; }
 
 
 /* */

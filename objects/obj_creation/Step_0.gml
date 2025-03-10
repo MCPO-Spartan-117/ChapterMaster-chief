@@ -1,5 +1,4 @@
 // Chapters to choose from at creation
-frame_pacing = 1 * global.frame_pacing
 if (slide==2) and (scrollbar_engaged>0){
     var x1,x2,x3,x4,x5,x6,y1,y2,y3,y4,y5,y6,bs,see_size,total_max,current,top;
     x1=1111;y1=245;x2=1131;y2=671;bs=245;
@@ -31,7 +30,7 @@ if (slide==1){
         if (chapter_name!="nopw_nopw"){
             icon=25;
             custom=0;
-            change_slide = frame_pacing;
+            change_slide = global.frame_timings.t1;
             goto_slide=2;
             chapter_string=chapter_name;
         }
@@ -50,25 +49,24 @@ if (slate5==1) or (slate6==1){
     }
 }
 
-if (fade_in > 0) { fade_in -= frame_pacing; }
-if (fade_in <= 0) && (slate1 > 0) { slate1 -= frame_pacing; }
-if (slate1 <= 0) && (slate2 < 20) { slate2 += frame_pacing; }
-if (slate1 <= 0) && (slate3 < 20) { slate3 += frame_pacing; }
+if (fade_in > 0) { fade_in -= global.frame_timings.t1; }
+if (fade_in <= 0) && (slate1 > 0) { slate1 -= global.frame_timings.t1; }
+if (slate1 <= 0) && (slate2 < 20) { slate2 += global.frame_timings.t1; }
+if (slate1 <= 0) && (slate3 < 20) { slate3 += global.frame_timings.t1; }
 
-if (slate2 >= 7) && (slate4 < 30) { slate4 += frame_pacing; }
+if (slate2 >= 7) && (slate4 < 30) { slate4 += global.frame_timings.t1; }
 
-if (slate5 >= 1) && (slate5 <= 60) { slate5 += frame_pacing; }
+if (slate5 >= 1) && (slate5 <= 60) { slate5 += global.frame_timings.t1; }
 if (slate5 >= 61) { slate5 = 0; }
-if (slate6 >= 1) && (slate6 <= 60) { slate6 += frame_pacing; }
+if (slate6 >= 1) && (slate6 <= 60) { slate6 += global.frame_timings.t1; }
 if (slate6 >= 61) { slate6 = 0; }
 
 if (slate4>=30){
-    var _frame_pace_temp = 660 * global.invert_frame_pacing;
-    if (irandom(_frame_pace_temp) == 0 && slate5 <= 0) { slate5 = 1; }
-    if (irandom(_frame_pace_temp) == 0 && slate6 <= 0) { slate6 = 1; }
+    if (irandom(global.frame_timings.i660) == 0 && slate5 <= 0) { slate5 = 1; }
+    if (irandom(global.frame_timings.i660) == 0 && slate6 <= 0) { slate6 = 1; }
 }
 
-if (change_slide > 0) { change_slide += 2 * global.frame_pacing; }
+if (change_slide > 0) { change_slide += global.frame_timings.t2; }
 if (change_slide >= 100) { change_slide = -1; }
 // Sets up a new chapter with default options
 if (change_slide >= 35 && change_slide <= 36) || (chapter_name=="Doom Benefactors") || (chapter_string=="Doom Benefactors") {

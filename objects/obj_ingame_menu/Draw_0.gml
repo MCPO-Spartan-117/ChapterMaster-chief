@@ -135,10 +135,7 @@ if (settings=1){
     }
 
     if (change_volume == 3) {
-        var _fps_temp = settings_displayfps == 1 ? display_get_frequency() : settings_fps; // unsurprisingly, this takes wine's virtual desktop FPS
-        game_set_speed(_fps_temp, gamespeed_fps)
-        global.frame_pacing = 30 / _fps_temp;
-        global.invert_frame_pacing = _fps_temp / 30;
+        precalc_timings()
     }
 
     if (change_volume>0){

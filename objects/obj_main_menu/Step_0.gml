@@ -1,20 +1,19 @@
-frame_pacing = 1 * global.frame_pacing;
 if (cooldown>0) then cooldown-=1;
 
 var teh;teh=510;
 
 
 if (stage=1){
-    if (tim1 < 1) && (tim2 == 0) { tim1 += frame_pacing / 60; }
-    if (tim1 >= 0.99) && (tim2 < teh) { tim2 += frame_pacing; }
+    if (tim1 < 1) && (tim2 == 0) { tim1 += global.frame_timings.t1 / 60; }
+    if (tim1 >= 0.99) && (tim2 < teh) { tim2 += global.frame_timings.t1; }
 }
 if (tim2>=teh){stage=2;
     audio_sound_gain(snd_legal,0,60);
 }
 
 
-if (stage == 2) { tim1 -= frame_pacing / 60; }
-if (stage == 2) && (tim1 <= 0) { tim2 -= frame_pacing;
+if (stage == 2) { tim1 -= global.frame_timings.t1 / 60; }
+if (stage == 2) && (tim1 <= 0) { tim2 -= global.frame_timings.t1;
 
     if (tim2=(teh-28)) then alarm[2]=1;
 
@@ -34,14 +33,14 @@ if (stage == 2) && (tim1 <= 0) { tim2 -= frame_pacing;
 }
 
 if (stage == 3){
-    if (tim3 > -15) { tim3 -= frame_pacing; }
+    if (tim3 > -15) { tim3 -= global.frame_timings.t1; }
     
     // if (round(random(70))=5){
     if (round(random(60))=5){
         part_particles_create(p_system,0,random(room_height),particle1,1);
     }
     
-    if (tim3 <= -15) { tim4 += 0.75 * global.frame_pacing; }
+    if (tim3 <= -15) { tim4 += global.frame_timings.t075; }
     if (tim4>=37.5) and (instance_exists(obj_cursor)){obj_cursor.image_alpha=1;}
 }
 

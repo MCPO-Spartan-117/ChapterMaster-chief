@@ -420,10 +420,10 @@ function MainMenuButton(sprite=spr_ui_but_1, sprite_hover=spr_ui_hov_1, xx=0, yy
 			clicked = device_mouse_check_button_pressed(0,mb_left);
 		} else {
 			if (ossilate_down) {
-				if (ossilate < 24) { ossilate += 0.2 * global.frame_pacing; }
+				if (ossilate < 24) { ossilate += global.frame_timings.t02; }
 				if (ossilate >= 24) { ossilate_down = false; }
 			} else {
-				if (ossilate > 8) { ossilate -= 0.2 * global.frame_pacing; }
+				if (ossilate > 8) { ossilate -= global.frame_timings.t02; }
 				if (ossilate <= 8) { ossilate_down = true; }
 			}
 			if (hover_alpha>0){
