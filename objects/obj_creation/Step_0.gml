@@ -1,4 +1,5 @@
 // Chapters to choose from at creation
+frame_pacing = 1 * global.frame_pacing
 if (slide==2) and (scrollbar_engaged>0){
     var x1,x2,x3,x4,x5,x6,y1,y2,y3,y4,y5,y6,bs,see_size,total_max,current,top;
     x1=1111;y1=245;x2=1131;y2=671;bs=245;
@@ -30,7 +31,7 @@ if (slide==1){
         if (chapter_name!="nopw_nopw"){
             icon=25;
             custom=0;
-            change_slide=1;
+            change_slide = frame_pacing;
             goto_slide=2;
             chapter_string=chapter_name;
         }
@@ -49,31 +50,31 @@ if (slate5==1) or (slate6==1){
     }
 }
 
+if (fade_in > 0) { fade_in -= frame_pacing; }
+if (fade_in <= 0) && (slate1 > 0) { slate1 -= frame_pacing; }
+if (slate1 <= 0) && (slate2 < 20) { slate2 += frame_pacing; }
+if (slate1 <= 0) && (slate3 < 20) { slate3 += frame_pacing; }
 
-if (fade_in>0) then fade_in-=1;
-if (fade_in<=0) and (slate1>0) then slate1-=1;
-if (slate1<=0) and (slate2<20) then slate2+=1;
-if (slate1<=0) and (slate3<20) then slate3+=1;
+if (slate2 >= 7) && (slate4 < 30) { slate4 += frame_pacing; }
 
-if (slate2>=7) and (slate4<30) then slate4+=1;
-
-if (slate5>=1) and (slate5<=60) then slate5+=1;
-if (slate5=61) then slate5=0;
-if (slate6>=1) and (slate6<=60) then slate6+=1;
-if (slate6=61) then slate6=0;
+if (slate5 >= 1) && (slate5 <= 60) { slate5 += frame_pacing; }
+if (slate5 == 61) { slate5 = 0; }
+if (slate6 >= 1) && (slate6 <= 60) { slate6 += frame_pacing; }
+if (slate6 == 61) { slate6 = 0; }
 
 if (slate4>=30){
-    if (floor(random(660))==5) and (slate5<=0) then slate5=1;
-    if (floor(random(660))==6) and (slate6<=0) then slate6=1;
+    var _frame_pace_temp = 660 * global.invert_frame_pacing;
+    if (irandom(_frame_pace_temp) == 0 && slate5 <= 0) { slate5 = 1; }
+    if (irandom(_frame_pace_temp) == 0 && slate6 <= 0) { slate6 = 1; }
 }
 
-if (change_slide>0){change_slide+=1;}
-if (change_slide>0){change_slide+=1;}
-if (change_slide>=100) then change_slide=-1;
-if (change_slide>=100) then change_slide=-1;
+if (change_slide > 0) { change_slide += frame_pacing; }
+if (change_slide > 0) { change_slide += frame_pacing; }
+if (change_slide >= 100) { change_slide = -1; }
+if (change_slide >= 100) { change_slide = -1; }
 // Sets up a new chapter with default options
-if (change_slide==35) or (change_slide==36) or (chapter_name=="Doom Benefactors") or (chapter_string=="Doom Benefactors"){
-    if (goto_slide==1){
+if (change_slide >= 35 && change_slide <= 36) || (chapter_name=="Doom Benefactors") || (chapter_string=="Doom Benefactors") {
+    if (goto_slide == 1) {
         mouse_left=0;
         mouse_right=0;
         highlight=0;

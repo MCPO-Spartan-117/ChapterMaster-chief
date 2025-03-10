@@ -336,10 +336,10 @@ function draw_chapter_select(){
 	}
 
 	if ((tool == 1) && (highlighting < 30)) {
-		highlighting += 1;
+		highlighting += frame_pacing;
 	}
 	if ((tool == 0) && (highlighting > 0)) {
-		highlighting -= 1;
+		highlighting -= frame_pacing;
 	}
 	// if (new_hover=0) then highlight=0;
 

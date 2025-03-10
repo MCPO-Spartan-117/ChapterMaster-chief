@@ -15,14 +15,13 @@ if (fast=0){
 
 
 
-fast+=1;
-if (fast<alerts) then alarm[2]=10;
+fast += 1;
+if (fast < alerts) { alarm[2] = int64(10 * global.invert_frame_pacing); }
 
 if (fast>=alerts){
-    alarm[2]=9999;
-    alarm[3]=max(230,(alerts*60));
-    alarm[3]=min(alarm[3],360);
+    alarm[2] = int64(9999 * global.invert_frame_pacing);
+    alarm[3] = int64(max(230, (alerts * 60)) * global.invert_frame_pacing);
+    alarm[3] = int64(min(alarm[3], 360) * global.invert_frame_pacing);
 }
 
-if (alerts=0) then instance_destroy();
-
+if (alerts == 0) { instance_destroy(); }

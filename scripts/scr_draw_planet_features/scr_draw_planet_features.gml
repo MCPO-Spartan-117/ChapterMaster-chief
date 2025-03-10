@@ -356,6 +356,7 @@ function RackAndPinion(Type="forward") constructor{
 	reverse =false;
 	rack_y=0;
 	rotation = 360;
+	_frame_pacing_4 = 4 * global.frame_pacing
 	type=Type
 	if (type="forward"){
 		draw = function(x, y, freeze=false, Reverse=""){
@@ -370,9 +371,9 @@ function RackAndPinion(Type="forward") constructor{
 				}
 				draw_sprite_ext(spr_cog_pinion, 0, x, y, 1, 1, rotation, c_white, 1)
 				if (!reverse){
-					rotation-=4;
+					rotation -= _frame_pacing_4;
 				} else {
-					rotation+=4;
+					rotation += _frame_pacing_4;
 				}
 				rack_y = (75.3982236862/360)*(360-rotation);
 				if (rack_y > 70){
@@ -399,9 +400,9 @@ function RackAndPinion(Type="forward") constructor{
 				}
 				draw_sprite_ext(spr_cog_pinion, 0, x, y, 1, 1, rotation, c_white, 1)
 				if (!reverse){
-					rotation+=4;
+					rotation += _frame_pacing_4;
 				} else {
-					rotation-=4;
+					rotation -= _frame_pacing_4;
 				}
 				rack_y = (75.3982236862/360)*(360-rotation)
 				if (rack_y > 70){
@@ -429,7 +430,7 @@ function SpeedingDot(XX,YY, limit) constructor{
 		var top_cut = 36-stack>0 ? 36-stack :0;
 		var bottom_cut = bottom_limit<stack? 46-stack-bottom_limit:46;
 		draw_sprite_part_ext(spr_research_bar, 2, 0, top_cut, 200, bottom_cut, xx-105, yy+stack, 1, 0.7, c_white, 1);
-		stack+=3;
+		stack += 3 * global.frame_pacing;
 	}
 	current_y = function(){
 		return yy+stack;
@@ -508,6 +509,7 @@ function ShutterButton() constructor{
         draw_set_color(c_gray);		
 		width = Width *scale;
 		height = Height *scale;
+		frame_pacing = 1 * global.frame_pacing;
 		if (text=="") then entered = false;
 		if (entered==""){
 			entered = scr_hit(xx, yy, xx+width, yy+height);
@@ -517,7 +519,7 @@ function ShutterButton() constructor{
 		var shutter_backdrop = 5;
 		if (entered || click_timer>0){
 			if (time_open<20){
-				time_open++;
+				time_open += frame_pacing;
 				right_rack.draw(xx+width, yy, false, false);
 				left_rack.draw(xx, yy, false, false);
 			} else {
@@ -529,7 +531,7 @@ function ShutterButton() constructor{
 				click_timer++;
 			}
 		} else if (time_open>0){
-			time_open--;
+			time_open -= frame_pacing;
 			right_rack.draw(xx+width, yy, false, true);
 			left_rack.draw(xx, yy, false, true);
 		} else {
@@ -604,9 +606,10 @@ function DataSlate() constructor{
 		var line_move = yy+(70*scale_y)+((36*scale_y)*static_line);
 		draw_line(xx+(30*scale_x),line_move,xx+(820*scale_x),line_move);
 		draw_set_alpha(1);
-		if (irandom(75)=0 && static_line>1){static_line--;}
-		else{
-			static_line+=0.1;
+		if (irandom(75 * global.invert_frame_pacing) == 0 && static_line > 1) {
+			static_line -= 1 * global.frame_pacing; // not sure why you would do this, makes the game look like it is repeating frames
+		} else {
+			static_line += 0.1 * global.frame_pacing;
 		}
 		if (static_line>20) then static_line=1;
 		draw_set_color(c_gray);

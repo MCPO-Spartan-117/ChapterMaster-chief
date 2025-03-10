@@ -4,6 +4,8 @@ if !__b__
 {
 image_angle=direction;
 
+var _frame_pacing = 1 * global.frame_pacing;
+
 if (obj_fleet.start!=5) then exit;
 
 if (class="Daemon") and (image_alpha<1) then image_alpha+=0.006;
@@ -83,7 +85,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
     // if (class!="big") then flank!!!!
     
     
-    spid=spid*speed_bonus;
+    spid = spid * speed_bonus;
     
     dist=point_distance(x,y,target.x,target.y)-(max(sprite_get_width(sprite_index),sprite_get_height(sprite_index)));
     
@@ -138,25 +140,26 @@ if (hp>0) and (instance_exists(obj_p_ship)){
         
     }*/
     
-    
+    var _sped_up = 0.005 * global.frame_pacing;
+    var _sped_down = 0.025 * global.frame_pacing;
     if (action="attack"){
-        if (dist>o_dist) and (speed<((spid)/10)) then speed+=0.005;
-        if (dist<o_dist) and (speed>0) then speed-=0.025;
+        if (dist > o_dist) && (speed < ((spid) / 10)) { speed += _sped_up; }
+        if (dist < o_dist) && (speed > 0) { speed -= _sped_down; }
     }
     if (action="broadside"){
-        if (dist>o_dist) and (speed<((spid)/10)) then speed+=0.005;
-        if (dist<o_dist) and (speed>0) then speed-=0.025;
+        if (dist > o_dist) && (speed < ((spid) / 10)) { speed += _sped_up; }
+        if (dist < o_dist) && (speed > 0) { speed -= _sped_down; }
     }
     
 
     if (speed<0) then speed=speed*0.9;
 
-    if (cooldown[1]>0) then cooldown[1]-=1;
-    if (cooldown[2]>0) then cooldown[2]-=1;
-    if (cooldown[3]>0) then cooldown[3]-=1;
-    if (cooldown[4]>0) then cooldown[4]-=1;
-    if (cooldown[5]>0) then cooldown[5]-=1;
-    if (turret_cool>0) then turret_cool-=1;
+    if (cooldown[1] > 0) { cooldown[1] -= _frame_pacing; }
+    if (cooldown[2] > 0) { cooldown[2] -= _frame_pacing; }
+    if (cooldown[3] > 0) { cooldown[3] -= _frame_pacing; }
+    if (cooldown[4] > 0) { cooldown[4] -= _frame_pacing; }
+    if (cooldown[5] > 0) { cooldown[5] -= _frame_pacing; }
+    if (turret_cool > 0) { turret_cool -= _frame_pacing; }
 
     
     
@@ -172,7 +175,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
         if (dist>64) and (dist<300){
             bull=instance_create(x,y,obj_en_round);bull.direction=point_direction(x,y,targe.x,targe.y);
             if (owner = eFACTION.Tyranids) then bull.sprite_index=spr_glob;
-            bull.speed=20;bull.dam=3;bull.image_xscale=0.5;bull.image_yscale=0.5;turret_cool=floor(60/turrets);
+            bull.speed = 20 * global.frame_pacing; bull.dam = 3; bull.image_xscale = 0.5; bull.image_yscale = 0.5; turret_cool = floor(60 / turrets);
             if (owner = eFACTION.Necrons){bull.sprite_index=spr_green_las;bull.image_yscale=1;}
             bull.direction+=choose(random(10),1*-(random(10)));
         }
@@ -248,7 +251,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             
             if (string_count("orpedo",wep)=0) and (string_count("Interceptor",wep)=0) and (string_count("ommerz",wep)=0) and (string_count("Claws",wep)=0) and (string_count("endrils",wep)=0) and (ok=3) and (owner != eFACTION.Necrons){
                 bull=instance_create(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),obj_en_round);
-                bull.speed=20;bull.dam=dam;
+                bull.speed = 20 * global.frame_pacing; bull.dam = dam;
                 if (targe=target) then bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);
                 if (facing!="front"){bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);}
                 if (string_count("ova",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
@@ -267,16 +270,16 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             if (string_count("orpedo",wep)=1) and (ok=3) and (owner != eFACTION.Necrons){
                 if (class!="Ravager"){
                     bull=instance_create(x,y+lengthdir_y(-30,direction+90),obj_en_round);
-                    bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                    bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 }
                 bull=instance_create(x,y+lengthdir_y(-10,direction+90),obj_en_round);
-                bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 bull=instance_create(x,y+lengthdir_y(10,direction+90),obj_en_round);
-                bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 
                 if (class!="Ravager"){
                     bull=instance_create(x,y+lengthdir_y(30,direction+90),obj_en_round);
-                    bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                    bull.speed=10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 }
                 
             }
@@ -297,7 +300,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             }
             if (wep="Star Pulse Generator") and (ok=3) and (instance_exists(target)){
                 bull=instance_create(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),obj_en_pulse);
-                bull.speed=20;
+                bull.speed = 20 * global.frame_pacing;
                 if (targe=target) then bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);
                 if (facing!="front"){bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);}
                 bull.target_x=target.x;bull.target_y=target.y;
@@ -376,7 +379,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
     
     
     if (target!=0){
-        if (speed<((spid)/10)) then speed+=0.02;
+        if (speed < ((spid) / 10)) { speed += 0.02 * global.frame_pacing; }
         
         var dist, range;
         if (instance_exists(target)){
@@ -394,12 +397,12 @@ if (hp>0) and (instance_exists(obj_p_ship)){
     if (y<-2000) or (y>room_height+2000) or (x<-2000) or (x>room_width+2000) then hp=-50;
     
     
-    if (cooldown[1]>0) then cooldown[1]-=1;
-    if (cooldown[2]>0) then cooldown[2]-=1;
-    if (cooldown[3]>0) then cooldown[3]-=1;
-    if (cooldown[4]>0) then cooldown[4]-=1;
-    if (cooldown[5]>0) then cooldown[5]-=1;
-    if (turret_cool>0) then turret_cool-=1;
+    if (cooldown[1] > 0) { cooldown[1] -= _frame_pacing; }
+    if (cooldown[2] > 0) { cooldown[2] -= _frame_pacing; }
+    if (cooldown[3] > 0) { cooldown[3] -= _frame_pacing; }
+    if (cooldown[4] > 0) { cooldown[4] -= _frame_pacing; }
+    if (cooldown[5] > 0) { cooldown[5] -= _frame_pacing; }
+    if (turret_cool > 0) { turret_cool -= _frame_pacing; }
 
     
     var bull, targe, rdir, dirr, dist, xx, yy, ok;
@@ -414,7 +417,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             bull=instance_create(x,y,obj_en_round);bull.direction=point_direction(x,y,targe.x,targe.y);
             if (owner = eFACTION.Tyranids) then bull.sprite_index=spr_glob;
             if (owner = eFACTION.Tau) or (owner = eFACTION.Eldar) then bull.sprite_index=spr_pulse;
-            bull.speed=20;bull.dam=3;bull.image_xscale=0.5;bull.image_yscale=0.5;turret_cool=floor(60/turrets);
+            bull.speed = 20 * global.frame_pacing; bull.dam = 3; bull.image_xscale = 0.5; bull.image_yscale = 0.5; turret_cool = floor(60 / turrets);
             bull.direction+=choose(random(10),1*-(random(10)));
         }
     }
@@ -488,7 +491,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             
             if (string_count("orpedo",wep)=0) and (string_count("Interceptor",wep)=0) and (string_count("ommerz",wep)=0) and (string_count("Claws",wep)=0) and (string_count("endrils",wep)=0) and (ok=3){
                 bull=instance_create(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),obj_en_round);
-                bull.speed=20;bull.dam=dam;
+                bull.speed = 20 * global.frame_pacing; bull.dam = dam;
                 if (targe=target) then bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);
                 if (facing!="front"){bull.direction=point_direction(x+lengthdir_x(32,direction),y+lengthdir_y(32,direction),target.x,target.y);}
                 if (string_count("ova",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
@@ -497,7 +500,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
                 if (string_count("Ion",wep)=1){bull.sprite_index=spr_pulse;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Rail",wep)=1){bull.sprite_index=spr_railgun;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Gravitic",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
-                if (string_count("Plasma",wep)=1){bull.sprite_index=spr_ground_plasma;bull.image_xscale=2;bullimage_yscale=2;bull.speed=15;}
+                if (string_count("Plasma", wep) == 1){bull.sprite_index = spr_ground_plasma; bull.image_xscale = 2; bullimage_yscale = 2; bull.speed = 15 * global.frame_pacing;}
                 if (string_count("Pyro-Acid",wep)=1){bull.sprite_index=spr_glob;bull.image_xscale=2;bullimage_yscale=2;}
                 
                 if (string_count("Weapons",wep)=1) and (owner = eFACTION.Eldar){bull.sprite_index=spr_ground_las;bull.image_xscale=2;bull.image_yscale=2;}
@@ -507,16 +510,16 @@ if (hp>0) and (instance_exists(obj_p_ship)){
             if (string_count("orpedo",wep)=1) and (ok=3){
                 if (class!="Ravager"){
                     bull=instance_create(x,y+lengthdir_y(-30,direction+90),obj_en_round);
-                    bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                    bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 }
                 bull=instance_create(x,y+lengthdir_y(-10,direction+90),obj_en_round);
-                bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 bull=instance_create(x,y+lengthdir_y(10,direction+90),obj_en_round);
-                bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 
                 if (class!="Ravager"){
                     bull=instance_create(x,y+lengthdir_y(30,direction+90),obj_en_round);
-                    bull.speed=10;bull.direction=direction;bull.sprite_index=spr_torpedo;bull.dam=dam;
+                    bull.speed = 10 * global.frame_pacing; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 }
                 
             }
