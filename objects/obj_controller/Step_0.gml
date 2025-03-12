@@ -395,7 +395,7 @@ if (menu == 20) && ((diplomacy > 0) || ((diplomacy < -5) && (diplomacy > -6))){
         cooldown_text = 0.8;
     }
 
-    if (diplo_alpha < 1) { diplo_alpha += 0.05; }
+    if (diplo_alpha < 1) { diplo_alpha += global.frame_timings.t005; }
 }
 // Check if fleet is minimized or not
 if (instance_exists(obj_popup)){

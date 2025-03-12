@@ -5,7 +5,7 @@ if (obj_fleet.start!=5) then exit;
 
 var dist;
 
-if (shields>0) and (shields<maxshields) then shields+=0.02;
+if (shields > 0) && (shields < maxshields) { shields += global.frame_timings.t002; }
 if (board_cooldown >= 0) { board_cooldown -= global.frame_timings.t1; }
 
 // Need to every couple of seconds check this
@@ -100,7 +100,7 @@ if (hp>0) and (instance_exists(target)){
     dist=point_distance(x,y,target.x,target.y)-(max(sprite_get_width(sprite_index),sprite_get_height(sprite_index)));
     
     // STC Bonuses
-    var ts;ts=0.2;if (obj_controller.stc_bonus[5]=3) then ts+=0.1;
+    var ts = global.frame_timings.t02; if (obj_controller.stc_bonus[5] == 3) { ts += global.frame_timings.t01; }
     
     
     if (paction!="move") and (paction!="attack_move") and (paction!="turn") and (paction!="attack_turn"){

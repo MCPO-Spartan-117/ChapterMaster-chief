@@ -10,11 +10,11 @@ if (instance_exists(target)){
     dist=point_distance(x,y,target.x,target.y);
     range=100+max(sprite_get_width(target.sprite_index),sprite_get_height(target.sprite_index));
     
-    if (action="close"){speed = global.frame_timings.t4; direction = turn_towards_point(direction, x, y, target.x, target.y, 8);}
+    if (action == "close") { speed = global.frame_timings.t4; direction = turn_towards_point(direction, x, y, target.x, target.y, global.frame_timings.t8); }
     if (dist<range) and (dist>100) and (action="close") then action="shoot";
     if (action="shoot") and (dist>range) then action="close";
     if (dist<80) and (action="shoot") then action="bank";
-    if (action="bank") then direction=turn_towards_point(direction,x,y,0,room_height/2,4);
+    if (action == "bank") { direction = turn_towards_point(direction, x, y, 0, room_height / 2, global.frame_timings.t4); }
     if (action="bank") and (dist>300) then action="close";
     
     

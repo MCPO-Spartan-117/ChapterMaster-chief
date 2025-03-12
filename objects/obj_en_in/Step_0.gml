@@ -13,15 +13,15 @@ if (instance_exists(target)){
     dist=point_distance(x,y,target.x,target.y);
     range=100+max(sprite_get_width(target.sprite_index),sprite_get_height(target.sprite_index));
     
-    if (action="close"){speed = global.frame_timings.t4; direction = turn_towards_point(direction, x, y, target.x, target.y, 6);}
+    if (action == "close"){speed = global.frame_timings.t4; direction = turn_towards_point(direction, x, y, target.x, target.y, global.frame_timings.t6);}
     if (dist<range) and (dist>100) and (action="close") then action="shoot";
     if (action="shoot") and (dist>range) then action="close";
     if (dist<80) and (action="shoot") then action="bank";
-    if (action="bank") then direction=turn_towards_point(direction,x,y,room_width,room_height/2,3);
+    if (action == "bank") { direction = turn_towards_point(direction, x, y, room_width, room_height / 2, global.frame_timings.t3); }
     if (action="bank") and (dist>300) then action="close";
         
     if (action="shoot") and (cooldown1<=0){
-        var bull; cooldown1 = global.frame_timings.t30; if (owner = eFACTION.Tau) { cooldown1 = global.frame_timings.t20; }
+        var bull; cooldown1 = 30; if (owner = eFACTION.Tau) { cooldown1 = 20; }
         bull=instance_create(x,y,obj_en_round);bull.direction=self.direction;
         if (owner = eFACTION.Tau) or (owner = eFACTION.Eldar) then bull.sprite_index=spr_pulse;
         if (owner = eFACTION.Tyranids) then bull.sprite_index=spr_glob;

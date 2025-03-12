@@ -53,7 +53,7 @@ if (effect=26){settings=0;cooldown=8;if (instance_exists(obj_controller)){obj_co
 
 if (effect>0) then effect=0;
 if (fading>0){
-    fading += global.frame_timings.t1; obj_fade.alpha = fading/30;
+    fading += global.frame_timings.t1; obj_fade.alpha = fading / 30;
     if (fading>=35){
         global.returned=1;
         audio_stop_all();

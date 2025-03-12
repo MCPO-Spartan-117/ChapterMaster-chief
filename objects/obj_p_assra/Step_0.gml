@@ -1,6 +1,6 @@
 
 image_angle=direction;
-if (cooldown>0) then cooldown-=1;
+if (cooldown > 0) { cooldown -= global.frame_timings.t1; }
 
 var dist;
 if (instance_exists(target)){
@@ -14,8 +14,8 @@ if (instance_exists(target)){
     dist=point_distance(x,y,target.x,target.y);
     
     if (action="goto") {speed = global.frame_timings.t4;
-        direction=turn_towards_point(direction,x,y,target.x,target.y,8);
-        direction=turn_towards_point(direction,x,y,target.x,target.y,8);
+        direction = turn_towards_point(direction, x, y, target.x, target.y, global.frame_timings.t8);
+        direction = turn_towards_point(direction, x, y, target.x, target.y, global.frame_timings.t8);
     }
     
     if (instance_exists(target)){
@@ -38,8 +38,8 @@ if (instance_exists(target)){
 }
 
 if (action="return"){speed = global.frame_timings.t4;
-    direction=turn_towards_point(direction,x,y,origin.x,origin.y,8);
-    direction=turn_towards_point(direction,x,y,origin.x,origin.y,8);
+    direction = turn_towards_point(direction, x, y, origin.x, origin.y, global.frame_timings.t8);
+    direction = turn_towards_point(direction, x, y, origin.x, origin.y, global.frame_timings.t8);
 }
 if (action="return") and (point_distance(x,y,origin.x,origin.y)<=16){
     speed=0;action="sdagsdagasdgsdag";x=-500;y=-500;

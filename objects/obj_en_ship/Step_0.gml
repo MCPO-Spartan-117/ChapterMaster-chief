@@ -6,11 +6,11 @@ image_angle=direction;
 
 if (obj_fleet.start!=5) then exit;
 
-if (class="Daemon") and (image_alpha<1) then image_alpha+=0.006;
+if (class == "Daemon") && (image_alpha < 1) { image_alpha += global.frame_timings.t0006; }
 
-var o_dist, dist, ch_rang, ex, spid;spid=0;
+var o_dist, dist, ch_rang, ex, spid = 0;
 
-if (shields>0) and (shields<maxshields) then shields+=0.02;
+if (shields > 0) && (shields < maxshields) { shields += global.frame_timings.t002; }
 
 
 // Need to every couple of seconds check this
@@ -89,15 +89,15 @@ if (hp>0) and (instance_exists(obj_p_ship)){
     
     
     if (target!=0) and (action="attack"){
-        direction=turn_towards_point(direction,x,y,target.x,target.y,.1);
+        direction=turn_towards_point(direction,x,y,target.x,target.y, global.frame_timings.t01);
     }
     if (target!=0) and (action="broadside") and (dist>o_dist){
         if (y>=target.y) then dist=point_distance(x,y,target.x+lengthdir_x(64,target.direction-180),target.y+lengthdir_y(128,target.direction-90))-(max(sprite_get_width(sprite_index),sprite_get_height(sprite_index)));
         if (y<target.y) then dist=point_distance(x,y,target.x+lengthdir_x(64,target.direction-180),target.y+lengthdir_y(128,target.direction+90))-(max(sprite_get_width(sprite_index),sprite_get_height(sprite_index)));
-        if (y>target.y) and (dist>o_dist) then direction=turn_towards_point(direction,x+lengthdir_x(64,target.direction-180),y,target.x,target.y+lengthdir_y(128,target.direction-90),.2);
-        if (y<target.y) and (dist>o_dist) then direction=turn_towards_point(direction,x+lengthdir_x(64,target.direction-180),y,target.x,target.y+lengthdir_y(128,target.direction+90),.2);
-        if (turn_bonus>1){
-            if (y<target.y) and (dist>o_dist) then direction=turn_towards_point(direction,x+lengthdir_x(64,target.direction-180),y,target.x,target.y+lengthdir_y(128,target.direction+90),.2);
+        if (y > target.y) && (dist > o_dist) { direction = turn_towards_point(direction, x + lengthdir_x(64, target.direction - 180), y, target.x, target.y + lengthdir_y(128, target.direction - 90), global.frame_timings.t02); }
+        if (y < target.y) && (dist > o_dist) { direction = turn_towards_point(direction, x + lengthdir_x(64, target.direction - 180), y, target.x, target.y + lengthdir_y(128, target.direction + 90), global.frame_timings.t02); }
+        if (turn_bonus > 1) {
+            if (y < target.y) && (dist > o_dist) { direction = turn_towards_point(direction, x + lengthdir_x(64, target.direction - 180), y, target.x, target.y + lengthdir_y(128, target.direction + 90), global.frame_timings.t02); }
         }
     }
     
@@ -258,7 +258,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
                 if (string_count("Ion",wep)=1){bull.sprite_index=spr_pulse;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Rail",wep)=1){bull.sprite_index=spr_railgun;bull.image_xscale=1.5;bull.image_yscale=1.5;}
                 if (string_count("Gravitic",wep)=1){bull.image_xscale=2;bull.image_yscale=2;}
-                if (string_count("Plasma", wep)=1){bull.sprite_index = spr_ground_plasma; bull.image_xscale = 2; bullimage_yscale = 2; bull.speed = global.frame_timings.t15;}
+                if (string_count("Plasma", wep) == 1) { bull.sprite_index = spr_ground_plasma; bull.image_xscale = 2; bullimage_yscale = 2; bull.speed = global.frame_timings.t15; }
                 if (string_count("Pyro-Acid",wep)=1){bull.sprite_index=spr_glob;bull.image_xscale=2;bullimage_yscale=2;}
                 
                 if (string_count("Weapons",wep)=1) and (owner = eFACTION.Eldar){bull.sprite_index=spr_ground_las;bull.image_xscale=2;bull.image_yscale=2;}
@@ -277,7 +277,7 @@ if (hp>0) and (instance_exists(obj_p_ship)){
                 
                 if (class!="Ravager"){
                     bull=instance_create(x,y+lengthdir_y(30,direction+90),obj_en_round);
-                    bull.speed= global.frame_timings.t10; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
+                    bull.speed = global.frame_timings.t10; bull.direction = direction; bull.sprite_index = spr_torpedo; bull.dam = dam;
                 }
                 
             }
@@ -383,10 +383,10 @@ if (hp>0) and (instance_exists(obj_p_ship)){
         if (instance_exists(target)){
             dist=point_distance(x,y,target.x,target.y);
             
-            if (action="swoop"){direction=turn_towards_point(direction,x,y,target.x,target.y,5-ship_size);}
+            if (action == "swoop") { direction = turn_towards_point(direction, x, y, target.x, target.y, global.frame_timings.t5 - ship_size); }
             if (dist<=o_dist) and (collision_line(x,y,x+lengthdir_x(o_dist,direction),y+lengthdir_y(o_dist,direction),obj_p_ship,0,1)) then action="attack";
             if (dist<300) and (action="attack") then action="bank";
-            if (action="bank") then direction=turn_towards_point(direction,x,y,room_width,room_height/2,5-ship_size);
+            if (action == "bank") { direction = turn_towards_point(direction, x, y, room_width, room_height / 2, global.frame_timings.t5 -ship_size); }
             if (action="bank") and (dist>700) then action="attack";
         }
     }

@@ -47,6 +47,7 @@ function precalc_timings() { // precalc most frame timings so we don't have to d
     global.frame_timings = {
         t0003 : 0.003 * global.frame_pacing,
         t0005 : 0.005 * global.frame_pacing,
+        t0006 : 0.006 * global.frame_pacing,
         t0012 : 0.012 * global.frame_pacing,
         t002 : 0.02 * global.frame_pacing,
         t003 : 0.03 * global.frame_pacing,
@@ -62,6 +63,7 @@ function precalc_timings() { // precalc most frame timings so we don't have to d
         t4 : 4 * global.frame_pacing,
         t5 : 5 * global.frame_pacing,
         t6 : 6 * global.frame_pacing,
+        t8 : 8 * global.frame_pacing,
         t10 : 10 * global.frame_pacing,
         t12 : 12 * global.frame_pacing,
         t15 : 15 * global.frame_pacing,
