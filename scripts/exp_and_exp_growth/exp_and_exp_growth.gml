@@ -101,22 +101,35 @@ function unit_stat_growth(grow_stat=false){
 
 
 
-	var _trait_data = global.trait_list;
-	var _stat_list = ARR_stat_list;
-	var _stat_count = array_length(_stat_list);
-	var _trait_stat_growth = {};
+    var _role = role();
+    var _trait_data = global.trait_list;
+    var _stat_list = ARR_stat_list;
+    var _stat_count = array_length(_stat_list);
+    var _trait_stat_growth = {};
+    var total_traited = 0;
+    var total_stat_points = 0;
 
 	for (var i=0;i<_stat_count;i++){
 		_trait_stat_growth[$ _stat_list[i]] = 0;
 	}
 	gains_set = false;
-	if (job!="none"){
-		if (job.type == "forge"){
-			stat_gains_opts=["technology"];
-			gains_set = true;
-			_trait_stat_growth.technology++;
-		}
-	}
+    if (job!="none") {
+        if (job.type == "forge") {
+            stat_gains_opts = ["technology"];
+            gains_set = true;
+            turn_stat_gains = { technology : 100 };
+            instace_stat_point_gains = { technology : 100 };
+            if (grow_stat) {
+                var _levels = int64(stat_point_exp_marker / 15);
+                for (var _lvl = 0; _lvl < _levels; _lvl++) {
+                    stat_point_exp_marker -= 15;
+                    self.technology++;
+                    assign_reactionary_traits();
+                }
+            }
+            return instace_stat_point_gains;
+        }
+    }
 	if (!gains_set){
 
 		for (var i=0;i<array_length(traits);i++){
@@ -141,8 +154,6 @@ function unit_stat_growth(grow_stat=false){
 		} else {
 			stat_gains_opts = base_group_growth_sets.Default;
 		}
-		var total_traited = 0;
-		var total_stat_points = 0;		
 		for (var i=0; i<_stat_count;i++){
 			var _stat = _stat_list[i];
 			total_traited+=_trait_stat_growth[$ _stat];
@@ -170,7 +181,6 @@ function unit_stat_growth(grow_stat=false){
 				total_stat_points++
 			}
 		}
-		var _role = role();
 		for (var i=0;i<array_length(role_growth);i++){
 			if (role == role_growth[i][0]){
 				array_push(stat_gains_opts, role_growth[i][1]);
@@ -194,31 +204,44 @@ function unit_stat_growth(grow_stat=false){
 			running_total += _stat_chance;
 		}
 	}		
-	if (grow_stat){
-		var instace_stat_point_gains = {};
-		while (stat_point_exp_marker>=15){
-			var extra_stats_earned = d100_roll(false);
-			stat_gain_choice = random(100);
-			for (var i=0;i<array_length(chance_list)-1;i++){
-				if (stat_gain_choice>=chance_list[i] && stat_gain_choice<chance_list[i+1]){
-					stat_gains = stat_items[0];
-				}
-			}
-			self[$ stat_gains]++;
-			stat_point_exp_marker-=15;
-			if (struct_exists(instace_stat_point_gains, stat_gains)){
-				instace_stat_point_gains[$ stat_gains]++;
-			} else {
-				instace_stat_point_gains[$ stat_gains]=1;
-			}
-			if (struct_exists(turn_stat_gains, stat_gains)){
-				turn_stat_gains[$ stat_gains]++;
-			} else {
-				turn_stat_gains[$ stat_gains]=1;
-			}
-		}
-		assign_reactionary_traits();
-		return instace_stat_point_gains;
+    if (grow_stat){
+        stat_gains = undefined;
+        var instace_stat_point_gains = {};
+        var _levels = int64(stat_point_exp_marker / 15);
+        for (var _lvl = 0; _lvl < _levels; _lvl++) {
+            //var extra_stats_earned = d100_roll(false);
+            stat_gain_choice = random(100);
+            for (var i = 0; i < array_length(chance_list) - 1; i++){
+                if (stat_gain_choice >= chance_list[i] && stat_gain_choice < chance_list[i + 1]) {
+                    stat_gains = stat_items[i]; // bro ignored the bot
+                }
+            }
+            if (stat_gains != undefined) {
+                self[$ stat_gains]++;
+                stat_point_exp_marker -= 15;
+                if (struct_exists(instace_stat_point_gains, stat_gains)){
+                    instace_stat_point_gains[$ stat_gains]++;
+                } else {
+                    instace_stat_point_gains[$ stat_gains] = 1;
+                }
+                if (struct_exists(turn_stat_gains, stat_gains)){
+                    turn_stat_gains[$ stat_gains]++;
+                } else {
+                    turn_stat_gains[$ stat_gains] = 1;
+                }
+            }
+        }
+
+        if (stat_gains != undefined) {
+            assign_reactionary_traits();
+            return instace_stat_point_gains;
+        } else {
+            var _name = name();
+            log_error($"{_role} {_name} No stat gains!")
+            scr_event_log("yellow", $"{_role} {_name} No stat gains!")
+            scr_alert("yellow", "DEBUG", $"{_role} {_name} No stat gains!")
+            return undefined;
+        }
 	} else {
 		show_debug_message($"{total_traited}")
 		return stat_gain_chances;
